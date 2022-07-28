@@ -11,7 +11,7 @@ $(document).ready(function() {
     "thousands":      ",",
     "lengthMenu":     "Hiển thị _MENU_ mục",
     "loadingRecords": "Đang tải...",
-    "processing":     "",
+    "processing":     "Loading...",
     "search":         "Tìm:",
     "zeroRecords":    "Không thấy dữ liệu phù hợp",
     "paginate": {

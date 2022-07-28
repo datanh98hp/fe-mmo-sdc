@@ -7,24 +7,25 @@
         id="accordionSidebar"
       >
         <!-- Sidebar - Brand -->
-        <a
+        <router-link
           class="sidebar-brand d-flex align-items-center justify-content-center"
-          href="#"
+          to="/"
         >
+
           <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
           </div>
           <div class="sidebar-brand-text mx-3">MMO<sup> 2 </sup></div>
-        </a>
+        </router-link>
 
         <!-- Divider -->
         <hr class="sidebar-divider my-0" />
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-          <a class="nav-link" href="#">
+          <router-link class="nav-link" to="/home">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Tổng quan</span></a
+            <span>Tổng quan</span></router-link
           >
         </li>
 
@@ -55,8 +56,8 @@
           >
             <div class="bg-white py-2 collapse-inner rounded">
               <!-- <h6 class="collapse-header">Thành phần</h6> -->
-              <a class="collapse-item" href="#">Tất cả chiến dịch</a>
-              <a class="collapse-item" href="#">Chiến dịch mới</a>
+              <router-link class="collapse-item" to="/camps">Tất cả chiến dịch</router-link>
+              <a class="collapse-item" href="/new-camp">Chiến dịch mới</a>
             </div>
           </div>
         </li>
@@ -118,9 +119,9 @@
         <hr class="sidebar-divider d-none d-md-block" />
 
         <!-- Sidebar Toggler (Sidebar) -->
-        <div class="text-center d-none d-md-inline">
+        <!-- <div class="text-center d-none d-md-inline">
           <button class="rounded-circle border-0" id="sidebarToggle"></button>
-        </div>
+        </div> -->
       </ul>
       <!-- End of Sidebar -->
 
@@ -385,29 +386,28 @@
 
             <!-- Content Row -->
           </div>
-
+            <hr/>
           <div class="container-fluid">
-            <div class="row">
+<!--            <div class="row">
               <div class="col-xl-6 mb-4 text-center">
                 <BarChart
                   title="Chuyển đổi trong 7 ngày"
                   v-bind:data-chart="data"
                 />
               </div>
-              <div class="col-sm-6 mb-4 text-center">
-                <!-- <BarChart
-                  title="Chuyển đổi trong 7 ngày"
-                  v-bind:data-chart="data"
-                /> -->
-              </div>
-              <!--  -->
-            </div>
+
+              &lt;!&ndash;  &ndash;&gt;
+            </div>-->
             <!--  -->
             <div class="row">
               <div class="col-sm-6 mb-4 text-center">
-                <DataTable/>
+<!--                <DataTable />-->
               </div>
               <div>Đơn Hàng Hệ Thống</div>
+            </div>
+
+            <div class="row">
+                <slot></slot>
             </div>
           </div>
 
@@ -440,7 +440,7 @@
       class="modal fade"
       id="logoutModal"
       tabindex="-1"
-      role="dialog"
+      role="dialog" 
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
@@ -477,17 +477,20 @@
 </template>
 
 <script>
-import BarChart from "@/components/Chart/AreaChart.vue";
-import DataTable from '@/components/Table/index.vue'
+/*import BarChart from "@/components/Chart/AreaChart.vue";*/
+/*import DataTable from '@/components/Table/index.vue'*/
 
 export default {
   name: "Layout-root",
   components: {
-    BarChart,
-    DataTable
+   /* BarChart,*/
+   /* DataTable,*/
+   
+},
+  child:{
+
   },
-  data() {
-const data = [[50, 30, 15, 50, 20, 28],[40, 20, 12, 15, 20, 25]];
+  data() {const data = [[50, 30, 15, 50, 20, 28],[40, 20, 12, 15, 20, 25]];
     return {
      data
     };

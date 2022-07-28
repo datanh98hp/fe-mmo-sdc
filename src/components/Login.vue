@@ -41,11 +41,11 @@
                                         
                                     </form>
                                     <hr>
-                                    <div class="text-center">
+<!--                                    <div class="text-center">
                                         <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                    </div>
+                                    </div>-->
                                     <div class="text-center">
-                                        <a class="small" href="register.html">Create an Account!</a>
+                                        <router-link class="small" to="/register">Create an Account!</router-link>
                                     </div>
                                 </div>
                             </div>
@@ -63,7 +63,17 @@
 
 <script>
 export default {
-    name:'login-form'
+    name:'login-form',
+    data(){
+
+      return {
+        username:"",
+        password:""
+      }
+    },
+  methods:{
+
+  }
 }
 </script>
 
