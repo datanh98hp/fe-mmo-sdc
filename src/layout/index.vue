@@ -468,10 +468,11 @@
             >
               Hủy
             </button>
-            <a class="btn btn-primary" href="#">Đăng xuất</a>
+            <button @click="logout()" data-dismiss="modal" class="btn btn-primary" href="#">Đăng xuất</button>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </template>
@@ -495,5 +496,11 @@ export default {
      data
     };
   },
+    methods:{
+      logout(){
+          localStorage.clear()
+          this.$router.push({name:'Login'})
+      }
+    }
 };
 </script>

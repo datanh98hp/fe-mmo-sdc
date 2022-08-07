@@ -1,7 +1,6 @@
 <template>
   <div class="bg-gradient-primary">
     <div class="container">
-
         <!-- Outer Row -->
         <div class="row justify-content-center">
 
@@ -17,26 +16,28 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" @submit="submit($event)">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address...">
+                                            <input type="text" class="form-control form-control-user"
+                                                aria-describedby="emailHelp"
+                                                v-model="username"
+                                                placeholder="Enter user name...">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
+                                                v-model="password"
                                                 id="exampleInputPassword" placeholder="Password">
                                         </div>
-                                        <div class="form-group">
+<!--                                        <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
                                                 <label class="custom-control-label" for="customCheck">Remember
                                                     Me</label>
                                             </div>
-                                        </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                        </div>-->
+                                        <button class="btn btn-primary btn-user btn-block">
                                             Login
-                                        </a>
+                                        </button>
                                         <hr>
                                         
                                     </form>
@@ -65,13 +66,53 @@
 export default {
     name:'login-form',
     data(){
-
       return {
         username:"",
-        password:""
+        password:"",
+          isAdmin:0
       }
     },
+    mounted(){
+
+        let user = localStorage.getItem('user-inf')
+         if(user){
+             this.$router.push({name:'Home'})
+         }
+         ///
+        ///refresh login
+    /*    setInterval(()=>{
+            localStorage.clear();
+        },60000*3)*/
+    }
+  ,  
   methods:{
+   async submit(e){
+        e.preventDefault()
+
+        //
+            let result = await this.axios.post('http://accestradeapi3.somee.com/api/User/Login',{username:this.username,password:this.password});
+            console.log(result.data)
+
+           if(result.data.success){
+               //save user-inf
+               const userData = {
+                   user:result.data.userName,
+                   userId:result.data.userId,
+                   isAdmin:result.data.is_Admin
+               }
+               this.isAdmin = result.data.isAdmin ;
+               //
+               localStorage.setItem('user-inf',JSON.stringify(userData))
+               this.$router.push({name:'Home'})
+           }
+
+
+
+
+        //
+
+        console.warn(this.username);
+    },
 
   }
 }

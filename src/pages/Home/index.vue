@@ -15,5 +15,13 @@ export default {
   child:{
 
   },
+    mounted() {
+      const user = localStorage.getItem('user-inf');
+      if (user) {
+          this.$router.push({name:'Home'})
+      }else {
+          this.$router.push({name:'Login'})
+      }
+    }
 }
 </script>

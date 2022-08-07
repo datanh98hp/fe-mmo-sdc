@@ -1,5 +1,4 @@
 <template>
-  <!-- <Login/> -->
   <router-view></router-view>
 </template>
 
@@ -9,7 +8,14 @@ export default {
   name: 'App',
   components: {
 
-  }
+  },
+
+    mounted() {
+        //
+        setInterval(()=>{
+            localStorage.clear();
+        },60000*5)
+    }
 }
 </script>
 
