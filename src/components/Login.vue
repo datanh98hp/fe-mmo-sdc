@@ -19,14 +19,14 @@
                                     <form class="user" @submit="submit($event)">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
-                                                aria-describedby="emailHelp"
+                                                aria-describedby="emaillHelp"
                                                 v-model="username"
                                                 placeholder="Enter user name...">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
                                                 v-model="password"
-                                                id="exampleInputPassword" placeholder="Password">
+                                                id="exampleInputPassword" placeholder="Password" autocomplete="">
                                         </div>
 <!--                                        <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -69,7 +69,6 @@ export default {
       return {
         username:"",
         password:"",
-          isAdmin:0
       }
     },
     mounted(){
@@ -82,7 +81,7 @@ export default {
         ///refresh login
     /*    setInterval(()=>{
             localStorage.clear();
-        },60000*3)*/
+        },60000*30)*/
     }
   ,  
   methods:{
@@ -91,27 +90,27 @@ export default {
 
         //
             let result = await this.axios.post('http://accestradeapi3.somee.com/api/User/Login',{username:this.username,password:this.password});
-            console.log(result.data)
-
+           /* console.log(result.data)*/
            if(result.data.success){
                //save user-inf
                const userData = {
                    user:result.data.userName,
                    userId:result.data.userId,
-                   isAdmin:result.data.is_Admin
+                   isAdmin:result.data.is_Admin,
+                   token:result.data.token_Key
                }
-               this.isAdmin = result.data.isAdmin ;
+
                //
                localStorage.setItem('user-inf',JSON.stringify(userData))
+
+               this.$store.commit('updateUserData',userData)
+               console.log("user from store: ",this.$store.state.user)
                this.$router.push({name:'Home'})
+           }else{
+                alert("Sai mật khẩu hoặc tài khoản...")
            }
 
-
-
-
         //
-
-        console.warn(this.username);
     },
 
   }

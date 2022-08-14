@@ -34,19 +34,19 @@
                         </div>
 
                         <div class="col-auto">
-                            <div class="d-flex flex-row justify-content-lg-center">
-                                <input type="text"  value="https://mmo2.com?u=1&camps=1" class="input-text" disabled />
-                                <button class="btn btn-info ml-3" @click="copyURL(`https://mmo2.com?u=1&camps=1`)">Coppy</button>
+                            <div class="justify-content-lg-center">
+                                <input type="text" value="https://mmo2.com?u=1&camps=1" class="input-text" disabled />
+                                <button class="btn btn-info ml-2" @click="copyURL(`https://mmo2.com?u=1&camps=1`)">Coppy</button>
                             </div>
                         </div>
                     </div>
                     <div class="col mt-4">
-                        <div class="text-sm">
-                            <button class="btn btn-block">Chi tiết:</button>
-                        </div>
+<!--                        <div class="text-sm">
+                            <button class="btn btn-light">Chi tiết</button>
+                        </div>-->
                         <!-- Button trigger modal -->
-                        <button type="button" v-show="checkAdmin()" class="btn btn-primary" data-toggle="modal" data-target="#editModal">
-                            Edit
+                        <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#editModal">
+                            Chi tiết
                         </button>
                     </div>
                     <!-- Logout Modal-->
@@ -61,7 +61,20 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Cập nhật đơn camp</h5>
+                                    <h5 v-show="checkAdmin()" class="modal-title" id="exampleModalLabel">Cập nhật đơn camp</h5>
+                                    <h5 v-if="checkAdmin()==false" class="modal-title" id="exampleModalLabel">Chi tiết camps</h5>
+                                    {{checkAdmin()}}
+                                    <button
+                                    v-show="checkAdmin()"
+                                        class="close"
+                                        type="button"
+                                        data-dismiss="modal"
+                                        aria-label="Close"
+                                    >
+                                        <span aria-hidden="true">
+                                            Edit
+                                        </span>
+                                    </button>
                                     <button
                                         class="close"
                                         type="button"
@@ -74,36 +87,42 @@
                                 <div class="modal-body">
                                     <form>
                                         <div class="form-group">
-                                            <label for="exampleFormControlInput1">Email address</label>
-                                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                                            <label for="exampleFormControlInput1">Tên Camp</label>
+                                            <h4 v-if="checkAdmin()==false">Ten camp demo</h4>
+                                            <input v-if="checkAdmin()==true" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Tên camp">
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleFormControlSelect1">Example select</label>
+                                            <label  for="exampleFormControlInput1">Liên kết: <a><span>http://</span></a></label>
+
+                                            <input v-if="checkAdmin()==true" type="email" class="form-control" id="exampleFormControlInput1" placeholder="http://">
+                                        </div>
+                                        <div class="form-group">
+                                            <label v-if="checkAdmin()==true" for="exampleFormControlSelect1">Loai san pham</label>
                                             <select class="form-control" id="exampleFormControlSelect1">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
+                                                <option selected>---Loai---</option>
+                                                <option>Tai chinh</option>
+                                                <option>Viễn thông</option>
+                                                <option>Thương mại</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleFormControlSelect2">Example multiple select</label>
-                                            <select multiple class="form-control" id="exampleFormControlSelect2">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
+                                            <label v-if="checkAdmin()==true" for="exampleFormControlSelect1">Loại</label>
+                                            <select class="form-control" id="exampleFormControlSelect1">
+                                                <option selected>---Loai---</option>
+                                                <option>CPS</option>
+                                                <option>CPL</option>
+                                                <option>CPQ</option>
                                             </select>
                                         </div>
+
                                         <div class="form-group">
-                                            <label for="exampleFormControlTextarea1">Example textarea</label>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                            <label for="exampleFormControlTextarea1">Mô tả:</label>
+                                            <textarea v-if="checkAdmin()==true" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                            <p v-if="checkAdmin()==false" class="form-control">Noi dung mo ta</p>
                                         </div>
                                     </form>
                                 </div>
-                                <div class="modal-footer">
+                                <div class="modal-footer" v-show="checkAdmin()">
                                     <button
                                         class="btn btn-secondary"
                                         type="button"
@@ -122,11 +141,19 @@
             </div>
 </template>
 <script>
+
 export default {
     name: 'item-Camp',
+    props:["name","type","typeProduct","linkProduct","description"],
+    components:{
+
+    },
     computed:{
 
     },
+   mounted(){
+    // console.log(this.$store.state.user)
+   },
     methods:{
         async copyURL(mytext) {
             try {
@@ -138,7 +165,7 @@ export default {
         },
         checkAdmin(){
             const user = localStorage.getItem('user-inf')
-            const isAdmin = JSON.parse(user).isAdmin;
+            const isAdmin = JSON.parse(user).isAdmin
             if(isAdmin==1){return true}
             return false;
         }

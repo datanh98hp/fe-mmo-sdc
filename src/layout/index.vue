@@ -195,7 +195,7 @@
                   aria-expanded="false"
                 >
                   <span class="mr-2 d-none d-lg-inline text-gray-600 small"
-                    >Dat Anh</span
+                    >{{user.user}}</span
                   >
                   <img
                     class="img-profile rounded-circle"
@@ -388,23 +388,7 @@
           </div>
             <hr/>
           <div class="container-fluid">
-<!--            <div class="row">
-              <div class="col-xl-6 mb-4 text-center">
-                <BarChart
-                  title="Chuyển đổi trong 7 ngày"
-                  v-bind:data-chart="data"
-                />
-              </div>
 
-              &lt;!&ndash;  &ndash;&gt;
-            </div>-->
-            <!--  -->
-            <div class="row">
-              <div class="col-sm-6 mb-4 text-center">
-<!--                <DataTable />-->
-              </div>
-              <div>Đơn Hàng Hệ Thống</div>
-            </div>
 
             <div class="row">
                 <slot></slot>
@@ -478,23 +462,21 @@
 </template>
 
 <script>
-/*import BarChart from "@/components/Chart/AreaChart.vue";*/
-/*import DataTable from '@/components/Table/index.vue'*/
+
 
 export default {
   name: "Layout-root",
-  components: {
-   /* BarChart,*/
-   /* DataTable,*/
-   
-},
+
   child:{
 
   },
-  data() {const data = [[50, 30, 15, 50, 20, 28],[40, 20, 12, 15, 20, 25]];
-    return {
-     data
-    };
+  data() {
+      const data = [[50, 30, 15, 50, 20, 28],[40, 20, 12, 15, 20, 25]];
+      const user = JSON.parse(localStorage.getItem('user-inf'))
+      return {
+            data,
+            user
+        };
   },
     methods:{
       logout(){

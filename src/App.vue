@@ -12,9 +12,9 @@ export default {
 
     mounted() {
         //
-        setInterval(()=>{
+       /* setInterval(()=>{
             localStorage.clear();
-        },60000*5)
+        },60000*)*30 */
     }
 }
 </script>
