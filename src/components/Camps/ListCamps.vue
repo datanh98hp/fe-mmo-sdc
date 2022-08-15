@@ -33,14 +33,11 @@ export default {
             const url = "http://accestradeapi3.somee.com/api/Camps/GetALL";
             const usr = localStorage.getItem('user-inf')
             const token = JSON.parse(usr).token;
-/*
-            console.log(token)
-*/
+            /*console.log(token)*/
                 this.axios.get(url,{
                     headers:{
                         'Authorization':'Bear '+ token
                     }
-
                 }).then((res)=>{
                 console.log(res)
             })
@@ -52,8 +49,5 @@ export default {
 }
 </script>
 <style>
-    #list-camps {
-        padding: 15px;
-        width: 100%;
-    }
+
 </style>

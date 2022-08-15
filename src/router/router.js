@@ -8,7 +8,6 @@ import Register from "@/Register";
 import NotFound from "@/pages/NotFound";
 
 const routes = [
-    {path:'/',component:Login},
     { path: '/home', component: Home, name: 'Home' },
     {path:'/login',component:Login,name: 'Login'},
     {path:'/camps',component:Camps,name:'Camps'},
@@ -25,25 +24,24 @@ const router = createRouter({
 
 
 //protect routes
-/* const isLogin = () =>{
-    if(localStorage.getItem("user-inf"))
-    return true;
+ const isLogin = () =>{
+    let isAuth = true;
+
+    if(localStorage.getItem('user-inf')!== undefined) isAuth = false;
+    return isAuth;
+
  }
- const protectedRoutes = [
+ /*const protectedRoutes = [
      'home',
     'profile',
      'camps'
- ]
+ ]*/
 router.beforeEach((to,from,next)=>{
-   const isprotected = protectedRoutes.includes(to.name)
-   /!* console.log(isprotected)
-    from.name
-    next()*!/
- if (isprotected && !isLogin()){
-        next({
-           path:'/home'
-        })
-   }
- })*/
+    if(isLogin()===false && to.name !=='Login'){
+        next({name:'Login'});
+    }else{
+        next()
+    }
+ })
 
 export default  router;
