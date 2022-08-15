@@ -105,6 +105,9 @@ export default {
 
                this.$store.commit('updateUserData',userData)
                console.log("user from store: ",this.$store.state.user)
+               //set auth = true
+               this.$store.commit('setLogined');
+               localStorage.setItem('isLogin',true)
                this.$router.push({name:'Home'})
            }else{
                 alert("Sai mật khẩu hoặc tài khoản...")

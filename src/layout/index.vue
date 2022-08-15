@@ -472,7 +472,7 @@ export default {
   },
   data() {
       const data = [[50, 30, 15, 50, 20, 28],[40, 20, 12, 15, 20, 25]];
-      const user = JSON.parse(localStorage.getItem('user-inf'))
+      const user = this.$store.getters.getUserInf
       return {
             data,
             user

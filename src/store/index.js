@@ -4,10 +4,14 @@ userinf = JSON.parse(userinf)
 const store = createStore({
     state(){
         return {
-            user: userinf
+            user: userinf,
+            isAuth:false
         }
     },
     mutations:{
+        setLogined(state){
+            state.isAuth = true;
+        },
         updateUserData(state,newUser){
             state.user = newUser;
         }
@@ -26,6 +30,9 @@ const store = createStore({
         },
         getUserRole(state){
             return state.user.token
+        },
+        getStatusLogin(){
+            return this.state.isAuth
         }
     }
 })

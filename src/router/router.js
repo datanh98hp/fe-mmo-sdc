@@ -26,10 +26,8 @@ const router = createRouter({
 //protect routes
  const isLogin = () =>{
     let isAuth = true;
-
-    if(localStorage.getItem('user-inf')!== undefined) isAuth = false;
+    if(!localStorage.getItem('setLogined')) isAuth = false;
     return isAuth;
-
  }
  /*const protectedRoutes = [
      'home',
@@ -37,7 +35,7 @@ const router = createRouter({
      'camps'
  ]*/
 router.beforeEach((to,from,next)=>{
-    if(isLogin()===false && to.name !=='Login'){
+    if(isLogin() && to.name !=='Login'){
         next({name:'Login'});
     }else{
         next()
