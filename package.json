@@ -12,6 +12,7 @@
     "axios": "^0.27.2",
     "chart.js": "^3.8.0",
     "core-js": "^3.8.3",
+    "datatables.net-bs5": "^1.12.1",
     "datatables.net-buttons": "^2.2.3",
     "datatables.net-dt": "^1.12.1",
     "datatables.net-select": "^1.4.0",

@@ -11,7 +11,7 @@
                         :data="data"
                         :options="{ select: true }"
                         ref="table"
-                       width="100%" cellspacing="0">
+                        width="100%" cellspacing="0">
 
                     <thead>
                     <tr>
@@ -509,5 +509,7 @@ export default {
 </script>
 
 <style>
+
 @import 'datatables.net-dt';
+@import 'datatables.net-bs5';
 </style>
