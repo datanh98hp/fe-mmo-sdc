@@ -1,48 +1,47 @@
 <template>
-    <ItemCamp/>
-    <ItemCamp/>
-    <ItemCamp/>
-    <ItemCamp/>
-    <ItemCamp/>
-    <ItemCamp/>
-    <ItemCamp/>
-    <ItemCamp/>
+    <div class="row">
+        <ItemCamp v-for="(item) in this.$data" :key="item.id" />
+    </div>
 </template>
 
 <script>
 import ItemCamp from "@/components/Camps/ItemCamp";
-
+/*import { reactive } from 'vue'*/
 export default {
     name:'list-camps',
-    props:{
-
-    },
     components:{
         ItemCamp,
     },
     data(){
         return {
-
+            data:[]
         }
     },
+
     mounted() {
         this.loadCamps()
     },
+    computed(){
+        this.$data = this.$store.getters.getListCamps
+    },
     methods:{
         loadCamps(){
-            const url = "http://accestradeapi3.somee.com/api/Camps/GetALL";
-            const usr = localStorage.getItem('user-inf')
-            const token = JSON.parse(usr).token;
-            /*console.log(token)*/
+            this.$store.dispatch('getListCamps')
+
+            /*const url = "http://accestradeapi3.somee.com/api/Camps/GetALL";
+            const token = this.$store.getters.getTokenUser
+            /!*console.log(token)*!/
                 this.axios.get(url,{
                     headers:{
-                        'Authorization':'Bear '+ token
+                        'Authorization':'Bearer '+ token
                     }
                 }).then((res)=>{
-                console.log(res)
+                console.log(res.data);
             })
 
            console.log("danhs sach camp se duoc hien thi")
+
+             */
         },
 
     }

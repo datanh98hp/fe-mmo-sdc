@@ -1,11 +1,13 @@
 import {createStore} from 'vuex'
+import axios from "axios";
 let userinf = localStorage.getItem('user-inf');
 userinf = JSON.parse(userinf)
 const store = createStore({
     state(){
         return {
             user: userinf,
-            isAuth:false
+            isAuth:false,
+            listCamps:[]
         }
     },
     mutations:{
@@ -14,12 +16,30 @@ const store = createStore({
         },
         updateUserData(state,newUser){
             state.user = newUser;
+        },
+        setListDataCamps(state,payload){
+            state.listCamps = payload;
         }
     },
     actions:{
        /*async loginAction({commit}){
             commit("updateUserData",data)
        }*/
+        async getListCamps(context){
+
+            const url = "http://accestradeapi3.somee.com/api/Camps/GetALL";
+            const token = context.getters.getTokenUser
+           /* console.log(token)*/
+            axios.get(url,{
+                headers:{
+                    'Authorization':'Bearer '+ token
+                }
+            }).then((res)=>{
+                console.log(res.data);
+                context.commit('setListDataCamps',res.data)
+            })
+
+        }
     },
     getters:{
         getUserInf(state){
@@ -33,6 +53,9 @@ const store = createStore({
         },
         getStatusLogin(){
             return this.state.isAuth
+        },
+        getListCamps(state){
+            return state.listCamps
         }
     }
 })

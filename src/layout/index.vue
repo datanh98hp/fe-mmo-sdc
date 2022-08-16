@@ -388,11 +388,10 @@
           </div>
             <hr/>
           <div class="container-fluid">
-
-
-            <div class="row">
+<!--            <div class="row">
                 <slot></slot>
-            </div>
+            </div>-->
+              <slot></slot>
           </div>
 
           <!-- /.container-fluid -->

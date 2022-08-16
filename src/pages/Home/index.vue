@@ -1,14 +1,15 @@
 <template>
  <Layout>
+     <div class="row">
          <div class="col-xl-6 mb-4 text-center h-5">
-            <Table/>
+             <Table/>
          </div>
          <div class="col-sm-6 mb-4 text-center">Đơn Hàng Hệ Thống</div>
-     <!--  -->
+         <!--  -->
          <div class="col-sm-6 mb-4 text-center">
 
          </div>
-
+     </div>
  </Layout>
 </template>
 

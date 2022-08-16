@@ -8,6 +8,7 @@ import Register from "@/Register";
 import NotFound from "@/pages/NotFound";
 
 const routes = [
+    { path: '/',component: Login},
     { path: '/home', component: Home, name: 'Home' },
     {path:'/login',component:Login,name: 'Login'},
     {path:'/camps',component:Camps,name:'Camps'},

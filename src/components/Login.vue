@@ -72,7 +72,6 @@ export default {
       }
     },
     mounted(){
-
         let user = localStorage.getItem('user-inf')
          if(user){
              this.$router.push({name:'Home'})
