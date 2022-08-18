@@ -18,13 +18,15 @@ const store = createStore({
             state.user = newUser;
         },
         setListDataCamps(state,payload){
+           /* console.log("payload: ",payload)*/
             state.listCamps = payload;
         }
+
     },
     actions:{
-       /*async loginAction({commit}){
-            commit("updateUserData",data)
-       }*/
+        async loginAction({commit}){
+            commit("setLogined")
+       },
         async getListCamps(context){
 
             const url = "http://accestradeapi3.somee.com/api/Camps/GetALL";
@@ -32,13 +34,13 @@ const store = createStore({
            /* console.log(token)*/
             axios.get(url,{
                 headers:{
-                    'Authorization':'Bearer '+ token
+                    Authorization:'Bearer '+ token
                 }
             }).then((res)=>{
                 console.log(res.data);
                 context.commit('setListDataCamps',res.data)
+                context.commit('setLogined')
             })
-
         }
     },
     getters:{
@@ -49,10 +51,10 @@ const store = createStore({
             return state.user.token
         },
         getUserRole(state){
-            return state.user.token
+            return state.user.isAdmin
         },
-        getStatusLogin(){
-            return this.state.isAuth
+        getStatusLogin(state){
+            return state.isAuth
         },
         getListCamps(state){
             return state.listCamps

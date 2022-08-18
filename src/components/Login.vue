@@ -35,8 +35,8 @@
                                                     Me</label>
                                             </div>
                                         </div>-->
-                                        <button class="btn btn-primary btn-user btn-block">
-                                            Login
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                                            <span>Login</span>
                                         </button>
                                         <hr>
                                         
@@ -65,7 +65,7 @@
 <script>
 export default {
     name:'login-form',
-    data(){
+    data:()=>{
       return {
         username:"",
         password:"",
@@ -78,18 +78,17 @@ export default {
          }
          ///
         ///refresh login
-    /*    setInterval(()=>{
+        setInterval(()=>{
             localStorage.clear();
-        },60000*30)*/
+        },60000*30)
     }
   ,  
   methods:{
    async submit(e){
         e.preventDefault()
-
         //
             let result = await this.axios.post('http://accestradeapi3.somee.com/api/User/Login',{username:this.username,password:this.password});
-           /* console.log(result.data)*/
+
            if(result.data.success){
                //save user-inf
                const userData = {
@@ -98,16 +97,18 @@ export default {
                    isAdmin:result.data.is_Admin,
                    token:result.data.token_Key
                }
-
                //
                localStorage.setItem('user-inf',JSON.stringify(userData))
 
                this.$store.commit('updateUserData',userData)
-               console.log("user from store: ",this.$store.state.user)
+            /*   console.log("user from store: ",this.$store.state.user)*/
                //set auth = true
-               this.$store.commit('setLogined');
+               this.$store.dispatch('loginAction');
                localStorage.setItem('isLogin',true)
+               console.log('Loginnnnnnnnnnnnnnnn')
+
                this.$router.push({name:'Home'})
+
            }else{
                 alert("Sai mật khẩu hoặc tài khoản...")
            }

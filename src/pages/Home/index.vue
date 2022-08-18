@@ -34,7 +34,7 @@ export default {
 
   },
     mounted() {
-      /*const user = localStorage.getItem('user-inf');
+     /* const user = localStorage.getItem('user-inf');
       if (user) {
           this.$router.push({name:'Home'})
       }else {
