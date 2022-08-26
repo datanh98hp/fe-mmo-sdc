@@ -71,7 +71,7 @@ const store = createStore({
         async getListOrderSys(context){
             const token = context.getters.getTokenUser;
             //const perEl = process.env.NUMBER_ORDER_PERLOAD
-            const url = `http://accestradeapi3.somee.com/api/Oder/GetOderSystem?numberOders=10`;
+            const url = `https://accestradeapi3.somee.com/api/Oder/GetOderSystem?numberOders=10`;
 
             axios.get(url,{
                 headers:{
