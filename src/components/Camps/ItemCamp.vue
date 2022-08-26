@@ -4,11 +4,11 @@
             <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-header">
                     <div class="card-title" >
-                        <p>Tên camp</p>
+                        <p>{{$props.name}}</p>
                     </div>
                 </div>
                 <div class="card-img">
-                    <img alt="" src="./img.jpg" />
+                    <img style="width: 70%" class="img-fluid" alt="" :src="this.$props.img || './img.jpg'"  />
                 </div>
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -35,8 +35,8 @@
 
                         <div class="col-auto">
                             <div class="justify-content-lg-center">
-                                <input type="text" value="https://mmo2.com?u=1&camps=1" class="input-text" disabled />
-                                <button class="btn btn-info ml-2" @click="copyURL(`https://mmo2.com?u=1&camps=1`)">Coppy</button>
+                                <input type="text" :value="$props.link" class="input-text" disabled />
+                                <button class="btn btn-info ml-2" @click="copyURL(`${$props.link}`)">Coppy</button>
                             </div>
                         </div>
                     </div>
@@ -144,11 +144,8 @@
 
 export default {
     name: 'item-Camp',
-    props:["name","type","typeProduct","linkProduct","description"],
+    props:["name","type","link","typeProduct","linkProduct","description","img"],
     components:{
-
-    },
-    computed:{
 
     },
    mounted(){
@@ -174,6 +171,12 @@ export default {
 }
 </script>
 <style>
+.card-img{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
     .card-img > img {
         width: 100%;
         border-radius: 1%;

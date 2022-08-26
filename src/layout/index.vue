@@ -57,7 +57,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
               <!-- <h6 class="collapse-header">Thành phần</h6> -->
               <router-link class="collapse-item" to="/camps">Tất cả chiến dịch</router-link>
-              <a class="collapse-item" href="/new-camp">Chiến dịch mới</a>
+              <router-link class="collapse-item" to="/history">Lịch sử gần đây</router-link>
             </div>
           </div>
         </li>
@@ -82,11 +82,10 @@
             data-parent="#accordionSidebar"
           >
             <div class="bg-white py-2 collapse-inner rounded">
-              <h6 class="collapse-header">Custom Utilities:</h6>
-              <a class="collapse-item" href="#">Colors</a>
-              <a class="collapse-item" href="#">Borders</a>
-              <a class="collapse-item" href="#">Animations</a>
-              <a class="collapse-item" href="#">Other</a>
+              <h6 class="collapse-header">Hoa hồng:</h6>
+              <a class="collapse-item" href="/ref">Hệ thồng giới thiệu</a>
+              <a class="collapse-item" href="/balance-ref">Hoa hồng giới thiệu</a>
+
             </div>
           </div>
         </li>
@@ -101,7 +100,7 @@
 
         <!-- Nav Item - Charts -->
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="/report">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Report</span></a
           >
@@ -109,7 +108,7 @@
 
         <!-- Nav Item - Tables -->
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="/analys">
             <i class="fas fa-fw fa-table"></i>
             <span>Bảng thống kê đơn</span></a
           >
@@ -242,10 +241,10 @@
           <!-- End of Topbar -->
 
           <!-- Begin Page Content -->
-          <div class="container-fluid">
-            <!-- Content Row -->
+<!--          <div class="container-fluid">
+            &lt;!&ndash; Content Row &ndash;&gt;
             <div class="row">
-              <!-- Earnings (Monthly) Card Example -->
+              &lt;!&ndash; Earnings (Monthly) Card Example &ndash;&gt;
               <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
                   <div class="card-body">
@@ -273,7 +272,7 @@
                 </div>
               </div>
 
-              <!-- Earnings (Monthly) Card Example -->
+              &lt;!&ndash; Earnings (Monthly) Card Example &ndash;&gt;
               <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-success shadow h-100 py-2">
                   <div class="card-body">
@@ -301,7 +300,7 @@
                 </div>
               </div>
 
-              <!-- Earnings (Monthly) Card Example -->
+              &lt;!&ndash; Earnings (Monthly) Card Example &ndash;&gt;
               <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-info shadow h-100 py-2">
                   <div class="card-body">
@@ -355,7 +354,7 @@
                 </div>
               </div>
 
-              <!-- Pending Requests Card Example -->
+              &lt;!&ndash; Pending Requests Card Example &ndash;&gt;
               <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-warning shadow h-100 py-2">
                   <div class="card-body">
@@ -383,9 +382,8 @@
                 </div>
               </div>
             </div>
-
-            <!-- Content Row -->
-          </div>
+            &lt;!&ndash; Content Row &ndash;&gt;
+          </div>-->
             <hr/>
           <div class="container-fluid">
 <!--            <div class="row">
@@ -403,7 +401,7 @@
         <footer class="sticky-footer bg-white">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
-              <!-- <span>Copyright &copy; Your Website 2021</span> -->
+               <span>Copyright &copy; SDC | MMO2 Website 2022</span>
             </div>
           </div>
         </footer>

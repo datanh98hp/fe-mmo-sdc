@@ -35,8 +35,11 @@
                                                     Me</label>
                                             </div>
                                         </div>-->
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            <span>Login</span>
+                                        <button type="submit" @click="()=>this.loading==true" class="btn btn-primary btn-user btn-block">
+                                        <span v-show="!this.loading">Login</span>
+                                            <div v-show="this.loading" class="spinner-border text-light" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
                                         </button>
                                         <hr>
                                         
@@ -69,6 +72,7 @@ export default {
       return {
         username:"",
         password:"",
+          loading:false
       }
     },
     mounted(){
@@ -87,7 +91,8 @@ export default {
    async submit(e){
         e.preventDefault()
         //
-            let result = await this.axios.post('http://accestradeapi3.somee.com/api/User/Login',{username:this.username,password:this.password});
+       this.loading = true
+            let result = await this.axios.post('https://accestradeapi3.somee.com/api/User/Login',{username:this.username,password:this.password});
 
            if(result.data.success){
                //save user-inf
@@ -101,16 +106,15 @@ export default {
                localStorage.setItem('user-inf',JSON.stringify(userData))
 
                this.$store.commit('updateUserData',userData)
-            /*   console.log("user from store: ",this.$store.state.user)*/
-               //set auth = true
+
                this.$store.dispatch('loginAction');
                localStorage.setItem('isLogin',true)
-               console.log('Loginnnnnnnnnnnnnnnn')
 
                this.$router.push({name:'Home'})
 
            }else{
-                alert("Sai mật khẩu hoặc tài khoản...")
+               this.loading = false
+               alert("Sai mật khẩu hoặc tài khoản...")
            }
 
         //

@@ -7,6 +7,7 @@ import Camps from "@/pages/Camps";
 import Register from "@/Register";
 import NotFound from "@/pages/NotFound";
 
+
 const routes = [
     { path: '/',component: Login},
     { path: '/home', component: Home, name: 'Home' },
@@ -15,6 +16,7 @@ const routes = [
     {path:'/register',component:Register},
     /*{path:'/profile/:id',},*/
     { path: '/:pathMatch(.*)*', name: 'NotFound',component:NotFound },
+
 
 ];
 

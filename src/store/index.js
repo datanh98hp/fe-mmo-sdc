@@ -7,7 +7,10 @@ const store = createStore({
         return {
             user: userinf,
             isAuth:false,
-            listCamps:[]
+            listCamps:[],
+            listOrder:[],
+            listOrderSys:[],
+            turnover:{}
         }
     },
     mutations:{
@@ -17,19 +20,27 @@ const store = createStore({
         updateUserData(state,newUser){
             state.user = newUser;
         },
-        setListDataCamps(state,payload){
-           /* console.log("payload: ",payload)*/
-            state.listCamps = payload;
+        setListDataCamps(state,listOrder){
+            state.listCamps = listOrder;
+        },
+        setListOrder(state,listOrder){
+            state.listOrder = listOrder
+        },
+        setListOrderSys(state,listOrderSys){
+            state.listOrderSys = listOrderSys
+        },
+        setTurnover(state,turnover){
+            state.turnover = turnover
         }
 
     },
+    ///
     actions:{
         async loginAction({commit}){
             commit("setLogined")
        },
         async getListCamps(context){
-
-            const url = "http://accestradeapi3.somee.com/api/Camps/GetALL";
+            const url = "https://accestradeapi3.somee.com/api/Camps/GetALL";
             const token = context.getters.getTokenUser
            /* console.log(token)*/
             axios.get(url,{
@@ -37,11 +48,55 @@ const store = createStore({
                     Authorization:'Bearer '+ token
                 }
             }).then((res)=>{
-                console.log(res.data);
+
                 context.commit('setListDataCamps',res.data)
-                context.commit('setLogined')
+                //context.commit('setLogined')
             })
-        }
+        },
+        async getListOrder(context){
+            const token = context.getters.getTokenUser;
+            const userId = context.getters.getUserInf.userId
+            const data = {userId:userId,numbers_Oder:10}
+
+            const url = `https://accestradeapi3.somee.com/api/Oder/GetLatestOrders`;
+            axios.post(url,data,{
+                headers:{
+                    Authorization:'Bearer '+ token,
+                },
+            }).then((res)=>{
+                console.log(res.data)
+                context.commit('setListOrder',res.data)
+            })
+        },
+        async getListOrderSys(context){
+            const token = context.getters.getTokenUser;
+            //const perEl = process.env.NUMBER_ORDER_PERLOAD
+            const url = `http://accestradeapi3.somee.com/api/Oder/GetOderSystem?numberOders=10`;
+
+            axios.get(url,{
+                headers:{
+                    Authorization:'Bearer '+ token,
+                },
+            }).then((res)=>{
+                console.log("LOG: ListOrderSys",res.data)
+                context.commit('setListOrderSys',res.data)
+            })
+
+        },
+        async getTurnoverData(context){
+            const token = context.getters.getTokenUser;
+            const userId = context.getters.getUserInf.userId;
+            const url = `https://accestradeapi3.somee.com/api/Turnover/GetTurnover?userId=${userId}`;
+            axios.get(url,{
+                headers:{
+                    Authorization:'Bearer '+ token,
+                },
+            }).then((res)=>{
+                console.log("LOG: Tunorver",res.data)
+                context.commit('setTurnover',res.data)
+            })
+        },
+
     },
     getters:{
         getUserInf(state){
@@ -58,6 +113,15 @@ const store = createStore({
         },
         getListCamps(state){
             return state.listCamps
+        },
+        getListOrder(state){
+            return state.listOrder
+        },
+        getListOrderSys(state){
+            return state.listOrderSys
+        },
+        getTunorver(state) {
+            return state.turnover
         }
     }
 })
