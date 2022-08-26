@@ -81,7 +81,6 @@ const store = createStore({
                 console.log("LOG: ListOrderSys",res.data)
                 context.commit('setListOrderSys',res.data)
             })
-
         },
         async getTurnoverData(context){
             const token = context.getters.getTokenUser;
@@ -96,7 +95,6 @@ const store = createStore({
                 context.commit('setTurnover',res.data)
             })
         },
-
     },
     getters:{
         getUserInf(state){
@@ -125,6 +123,4 @@ const store = createStore({
         }
     }
 })
-
-
 export default store;

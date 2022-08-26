@@ -7,12 +7,13 @@
                         <p>{{$props.name}}</p>
                     </div>
                 </div>
-                <div class="card-img">
-                    <img style="width: 70%" class="img-fluid" alt="" :src="this.$props.img || './img.jpg'"  />
-                </div>
-                <div class="card-body">
+
+                <div class="card-body text-center">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
+                            <div class="card-img">
+                                <img class="img-fluid" alt="" :src="this.$props.img || './img.jpg'"  />
+                            </div>
                             <div
                                 class="
                             text-xs
@@ -34,11 +35,12 @@
                         </div>
 
                         <div class="col-auto">
-                            <div class="justify-content-lg-center">
-                                <input type="text" :value="$props.link" class="input-text" disabled />
-                                <button class="btn btn-info ml-2" @click="copyURL(`${$props.link}`)">Coppy</button>
-                            </div>
+
                         </div>
+                    </div>
+                    <div class="link--group">
+                        <input type="text" :value="$props.link" class="input-text" disabled />
+                        <button class="btn btn-info ml-2" @click="copyURL(`${$props.link}`)">Coppy</button>
                     </div>
                     <div class="col mt-4">
 <!--                        <div class="text-sm">
@@ -172,15 +174,21 @@ export default {
 </script>
 <style>
 .card-img{
-    display:flex;
-    flex-direction: row;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-content: center;
+    align-items: center;
+    width: 100%;
+    height: 150px;
 }
-    .card-img > img {
-        width: 100%;
-        border-radius: 1%;
+    .card-img img {
+        width: 200px;
+        height: 160px;
     }
+    .link--group {
+
+    }
+
     .text-link {
         display: flex;
         flex-direction: row;
