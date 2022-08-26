@@ -1,16 +1,30 @@
 <template>
-    <div class="row">
-<!--        <div class="">
-            <form class="user">
-                <div class="form-group">
-                    <input type="text" class="form-control form-control-user"
+    <div class="col">
+
+            <form class="row user">
+                <div class="form-group px-2">
+                    <label for="inputState">P.Loai</label>
+                    <input type="text" class="form-control"
                            aria-describedby="emaillHelp"
-                           placeholder="Enter user name...">
+                           placeholder="Ten chien dich...">
+                </div>
+                <div class="form-group px-2">
+                    <label for="inputState">P.Loai</label>
+                    <select id="inputState" class="form-control">
+                        <option selected value="Chon ... ">Chon...</option>
+                        <option value="">CPS</option>
+                        <option value="">CPL</option>
+                        <option value="">CPQ</option>
+                        <option value="">CPQL</option>
+                    </select>
                 </div>
                 <hr>
             </form>
-        </div>-->
-       <ItemCamp  v-for="(item) in listCamps" :key="item.camp_Id" :name="item.camp_Name" :link="pre_link(item.camp_Id)" :img="item.camps_Image"/>
+        <hr>
+        <div class="row">
+            <ItemCamp v-for="(item) in listCamps" :key="item.camp_Id" :name="item.camp_Name" :link="pre_link(item.camp_Id)" :img="item.camps_Image"/>
+        </div>
+
     </div>
 </template>
 
