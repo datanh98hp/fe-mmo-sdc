@@ -81,10 +81,7 @@ export default {
              this.$router.push({name:'Home'})
          }
          ///
-        ///refresh login
-        setInterval(()=>{
-            localStorage.clear();
-        },60000*30)
+
     }
   ,  
   methods:{

@@ -9,12 +9,13 @@ export default {
   components: {
 
   },
-
     mounted() {
-        //
-       /* setInterval(()=>{
+
+        setInterval(()=>{
             localStorage.clear();
-        },60000*)*30 */
+        },60000*30)
+        //
+
     }
 }
 </script>

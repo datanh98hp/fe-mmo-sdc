@@ -1,6 +1,5 @@
 <template>
     <div class="col">
-
             <form class="row user">
                 <div class="form-group px-2">
                     <label for="inputState">P.Loai</label>
@@ -21,8 +20,10 @@
                 <hr>
             </form>
         <hr>
-        <div class="row">
-            <ItemCamp v-for="(item) in listCamps" :key="item.camp_Id" :name="item.camp_Name" :link="pre_link(item.camp_Id)" :img="item.camps_Image"/>
+        <div class="row col-12">
+            <ItemCamp v-for="(item) in listCamps" :key="item.camp_Id" :id="item.camp_Id" :name="item.camp_Name" :price="item.price" :link="pre_link(item.camp_Id)" :img="item.camps_Image" :type="item.type" :description="item.description"/>
+            <ItemCamp v-for="(item) in listCamps" :key="item.camp_Id" :id="item.camp_Id" :name="item.camp_Name" :price="item.price" :link="pre_link(item.camp_Id)" :img="item.camps_Image" :type="item.type" :description="item.description"/>
+            <ItemCamp v-for="(item) in listCamps" :key="item.camp_Id" :id="item.camp_Id" :name="item.camp_Name" :price="item.price" :link="pre_link(item.camp_Id)" :img="item.camps_Image" :type="item.type" :description="item.description"/>
         </div>
 
     </div>

@@ -1,18 +1,18 @@
 <template>
         <!-- Card Camps Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
+        <div class="col-xl-3 col-md-4 mb-4">
+            <div class="card border-left-primary shadow h-100">
                 <div class="card-header">
                     <div class="card-title" >
                         <p>{{$props.name}}</p>
                     </div>
                 </div>
 
-                <div class="card-body text-center">
+                <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="card-img">
-                                <img class="img-fluid" alt="" :src="this.$props.img || './img.jpg'"  />
+                                <img class="img-fluid" alt="" :src="$props.img || './img.jpg'"  />
                             </div>
                             <div
                                 class="
@@ -29,11 +29,11 @@
                                 Danh mục: Tài chính
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                40,000 VND
+                                {{ $props.price }} VND
+
                             </div>
 
                         </div>
-
                         <div class="col-auto">
 
                         </div>
@@ -51,7 +51,7 @@
                             Chi tiết
                         </button>
                     </div>
-                    <!-- Logout Modal-->
+                    <!-- detail Modal-->
                     <div
                         class="modal fade"
                         id="editModal"
@@ -63,9 +63,9 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 v-show="checkAdmin()" class="modal-title" id="exampleModalLabel">Cập nhật đơn camp</h5>
+                                    <h5 v-show="checkAdmin()==true" class="modal-title" id="exampleModalLabel">Cập nhật đơn camp</h5>
                                     <h5 v-if="checkAdmin()==false" class="modal-title" id="exampleModalLabel">Chi tiết camps</h5>
-                                    {{checkAdmin()}}
+<!--                                    {{checkAdmin()}}-->
                                     <button
                                     v-show="checkAdmin()"
                                         class="close"
@@ -74,7 +74,7 @@
                                         aria-label="Close"
                                     >
                                         <span aria-hidden="true">
-                                            Edit
+                                            <router-link to="{{`/camp/{{${$props.id}}`}}">Edit</router-link>
                                         </span>
                                     </button>
                                     <button
@@ -89,38 +89,40 @@
                                 <div class="modal-body">
                                     <form>
                                         <div class="form-group">
-                                            <label for="exampleFormControlInput1">Tên Camp</label>
-                                            <h4 v-if="checkAdmin()==false">Ten camp demo</h4>
+                                            <img class="img-fluid" alt="" :src="$props.img" style="width: 250px; height: 100%" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label v-if="checkAdmin()==false" for="exampleFormControlInput1">{{$props.name}}</label>
+                                            <h4 v-if="checkAdmin()==false">{{$props.name}}</h4>
                                             <input v-if="checkAdmin()==true" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Tên camp">
                                         </div>
                                         <div class="form-group">
-                                            <label  for="exampleFormControlInput1">Liên kết: <a><span>http://</span></a></label>
-
-                                            <input v-if="checkAdmin()==true" type="email" class="form-control" id="exampleFormControlInput1" placeholder="http://">
+                                            <label v-show="checkAdmin()==false" for="exampleFormControlInput1">Liên kết: <a><span>{{$props.link}}</span></a></label>
+                                            <input v-if="checkAdmin()==true" type="email" class="form-control" id="exampleFormControlInput1" :value="$props.link" disabled>
                                         </div>
                                         <div class="form-group">
-                                            <label v-if="checkAdmin()==true" for="exampleFormControlSelect1">Loai san pham</label>
-                                            <select class="form-control" id="exampleFormControlSelect1">
+                                            <label v-show="checkAdmin()==false" for="exampleFormControlSelect1">Loai san pham : <span><b>{{$props.type}}</b></span></label>
+                                            <select v-show="checkAdmin()==true" class="form-control" id="exampleFormControlSelect1" :value="$props.type">
+                                                <option selected>---Loai---</option>
+                                                <option value="CPS">CPS</option>
+                                                <option value="CPL">CPL</option>
+                                                <option value="CPQL">CPQL</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label v-if="checkAdmin()==true" for="exampleFormControlSelect1">Loại</label>
+                                            <select class="form-control" v-show="checkAdmin()==true" id="exampleFormControlSelect1">
                                                 <option selected>---Loai---</option>
                                                 <option>Tai chinh</option>
                                                 <option>Viễn thông</option>
                                                 <option>Thương mại</option>
                                             </select>
                                         </div>
-                                        <div class="form-group">
-                                            <label v-if="checkAdmin()==true" for="exampleFormControlSelect1">Loại</label>
-                                            <select class="form-control" id="exampleFormControlSelect1">
-                                                <option selected>---Loai---</option>
-                                                <option>CPS</option>
-                                                <option>CPL</option>
-                                                <option>CPQ</option>
-                                            </select>
-                                        </div>
 
                                         <div class="form-group">
                                             <label for="exampleFormControlTextarea1">Mô tả:</label>
-                                            <textarea v-if="checkAdmin()==true" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                            <p v-if="checkAdmin()==false" class="form-control">Noi dung mo ta</p>
+                                            <ckeditor  v-show="checkAdmin()==true" :editor="editor"  class="form-control" id="exampleFormControlTextarea1" rows="3"></ckeditor>
+                                            <p v-show="checkAdmin()==false" class="form-control">{{$props.description}}</p>
                                         </div>
                                     </form>
                                 </div>
@@ -143,12 +145,18 @@
             </div>
 </template>
 <script>
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export default {
     name: 'item-Camp',
     props:["name","type","link","typeProduct","linkProduct","description","img"],
     components:{
 
+    },
+    data(){
+        return {
+            editor:ClassicEditor,
+        }
     },
    mounted(){
     // console.log(this.$store.state.user)
@@ -163,8 +171,7 @@ export default {
             }
         },
         checkAdmin(){
-            const user = localStorage.getItem('user-inf')
-            const isAdmin = JSON.parse(user).isAdmin
+            const isAdmin = this.$store.getters.getUserRole
             if(isAdmin==1){return true}
             return false;
         }
