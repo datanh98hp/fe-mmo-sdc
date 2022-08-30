@@ -6,11 +6,13 @@ const store = createStore({
     state(){
         return {
             user: userinf,
+            ip:"0.0.0.0",
             isAuth:false,
             listCamps:[],
             listOrder:[],
             listOrderSys:[],
-            turnover:{}
+            turnover:{},
+            linkCamp:''
         }
     },
     mutations:{
@@ -31,11 +33,26 @@ const store = createStore({
         },
         setTurnover(state,turnover){
             state.turnover = turnover
+        },
+        setMyIp(state,ip){
+            state.ip = ip
+        },
+        setLinkCamp(state,link) {
+            state.link = link
         }
 
     },
     ///
     actions:{
+
+        async getIpAction({commit}){
+            const url = 'https://api.ipify.org';
+
+            axios.get(url).then(res=>{
+                commit("setMyIp",res.data)
+            })
+        }
+        ,
         async loginAction({commit}){
             commit("setLogined")
        },
@@ -50,7 +67,7 @@ const store = createStore({
             }).then((res)=>{
 
                 context.commit('setListDataCamps',res.data)
-                //context.commit('setLogined')
+                context.commit('setLogined')
             })
         },
         async getListOrder(context){
@@ -99,6 +116,9 @@ const store = createStore({
     getters:{
         getUserInf(state){
             return state.user
+        },
+        getIPAddr(state){
+            return state.ip
         },
         getTokenUser(state){
             return state.user.token

@@ -71,16 +71,20 @@ export default {
     data:()=>{
       return {
         username:"",
-        password:"",
-          loading:false
+        password:"", loading:false
       }
     },
     mounted(){
-        let user = localStorage.getItem('user-inf')
+        let user = JSON.parse(localStorage.getItem('user-inf'))
+        console.log('Login',user)
          if(user){
              this.$router.push({name:'Home'})
+         }else {
+             this.$router.push({name:'Login'})
          }
          ///
+
+        //
 
     }
   ,  
@@ -106,7 +110,7 @@ export default {
 
                this.$store.dispatch('loginAction');
                localStorage.setItem('isLogin',true)
-
+                console.log('api login ')
                this.$router.push({name:'Home'})
 
            }else{

@@ -194,7 +194,7 @@
                   aria-expanded="false"
                 >
                   <span class="mr-2 d-none d-lg-inline text-gray-600 small"
-                    >{{user.user}}</span
+                    >{{this.$store.getters.getUserInf.user}}</span
                   >
                   <img
                     class="img-profile rounded-circle"
@@ -467,12 +467,18 @@ export default {
   child:{
 
   },
-  data() {
+    mounted() {
+        const user = JSON.parse(localStorage.getItem('user-inf')) || ''
+
+        if (!user){
+            this.$router.push({name:'Login'})
+        }
+    },
+    data() {
       const data = [[50, 30, 15, 50, 20, 28],[40, 20, 12, 15, 20, 25]];
-      const user = this.$store.getters.getUserInf
-      return {
+        return {
             data,
-            user
+
         };
   },
     methods:{

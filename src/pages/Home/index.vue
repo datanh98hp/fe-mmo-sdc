@@ -80,14 +80,16 @@ export default {
     },
     mounted() {
 
-      const user = localStorage.getItem('user-inf');
+      const user = JSON.parse(localStorage.getItem('user-inf'));
       if (user) {
-          this.$router.push({name:'Home'})
+          /*this.$router.push({name:'Home'})*/
 
           this.$store.dispatch('getListCamps')
           this.$store.dispatch('getListOrder')
           this.$store.dispatch('getTurnoverData')
           this.$store.dispatch('getListOrderSys')
+          //
+          this.$store.dispatch('getIpAction')
 
       }else {
           this.$router.push({name:'Login'})

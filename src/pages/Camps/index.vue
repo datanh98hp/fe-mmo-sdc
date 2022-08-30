@@ -11,6 +11,7 @@ export default {
     components: {Layout,ListCamps},
     mounted() {
         const user = localStorage.getItem('user-inf') || undefined;
+        console.log(user,'Camps')
         if (user == undefined) {
             this.$router.push({name:'Login'})
         }else {

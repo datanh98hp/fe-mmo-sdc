@@ -10,12 +10,10 @@ export default {
 
   },
     mounted() {
-
         setInterval(()=>{
             localStorage.clear();
         },60000*30)
         //
-
     }
 }
 </script>

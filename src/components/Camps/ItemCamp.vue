@@ -8,7 +8,7 @@
                     </div>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body text-xl-center">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="card-img">
@@ -22,7 +22,7 @@
                             mb-1
                           "
                             >
-                                <h4>CPS</h4>
+                                <h4>{{$props.type}}</h4>
                             </div>
 
                             <div class="text-xs">
@@ -30,7 +30,6 @@
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                 {{ $props.price }} VND
-
                             </div>
 
                         </div>
@@ -38,7 +37,7 @@
 
                         </div>
                     </div>
-                    <div class="link--group">
+                    <div class="link--group text-xl-center">
                         <input type="text" :value="$props.link" class="input-text" disabled />
                         <button class="btn btn-info ml-2" @click="copyURL(`${$props.link}`)">Coppy</button>
                     </div>
@@ -98,7 +97,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label v-show="checkAdmin()==false" for="exampleFormControlInput1">Liên kết: <a><span>{{$props.link}}</span></a></label>
-                                            <input v-if="checkAdmin()==true" type="email" class="form-control" id="exampleFormControlInput1" :value="$props.link" disabled>
+                                            <input v-if="checkAdmin()==true" type="text" class="form-control" id="exampleFormControlInput1" :value="$props.link" disabled>
                                         </div>
                                         <div class="form-group">
                                             <label v-show="checkAdmin()==false" for="exampleFormControlSelect1">Loai san pham : <span><b>{{$props.type}}</b></span></label>

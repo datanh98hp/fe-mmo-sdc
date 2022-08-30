@@ -49,17 +49,18 @@ export default {
     }),
 
     mounted() {
+
         this.loadCamps()
     },
     methods:{
         loadCamps(){
-            console.log('')
             this.$store.dispatch('getListCamps')
         },
         pre_link(camId){
             //http://localhost:3000/click?userId=2&campId=c79a13c2-d918-470f-a168-21ff8801ae97
+            const host = location.origin
             const userId = JSON.parse( localStorage.getItem('user-inf')).userId
-            return `http://localhost:8080/click?userId=${userId}&campId=${camId}`;
+            return `${host}/click/${userId}/${camId}`;
 
         }
 
