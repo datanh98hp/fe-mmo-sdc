@@ -12,6 +12,7 @@ export default {
     mounted() {
         setInterval(()=>{
             localStorage.clear();
+            this.$router.push('Login')
         },60000*30)
         //
     }

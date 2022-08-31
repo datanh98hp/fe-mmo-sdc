@@ -32,7 +32,7 @@
                                  <MobileIcon/>
                             </span>
                         </td>
-                        <td>{{item.campPirce}}</td>
+                        <td>{{handleCurrency(item.campPirce)}}</td>
                         <td>{{item.confirmed_Time}}</td>
                         <td>
                             <span class="btn-sm bg-warning rounded-pill text-light" v-if="item.oder_status==1"> Chờ duyệt </span>
@@ -72,7 +72,19 @@ export default {
         /*getListOrder(){
             this.$store.dispatch('getListOrder')
         }*/
-    },
+        handleCurrency(value){
+            const formatter = new Intl.NumberFormat('vi-VN',{
+                style:'currency',
+                currency:'VND'
+            })
+            return formatter.format(value);
+        }
+       /* formatDate(datetime){
+
+
+        }*/
+    }
+    ,
     mounted() {
         /*this.getListOrder()*/
     },

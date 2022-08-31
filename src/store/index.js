@@ -49,6 +49,7 @@ const store = createStore({
             const url = 'https://api.ipify.org';
 
             axios.get(url).then(res=>{
+                console.log(" Get Ip    action IP",res.data)
                 commit("setMyIp",res.data)
             })
         }
