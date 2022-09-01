@@ -27,7 +27,10 @@
                             >
                                 <h4>{{$props.type}}</h4>
                             </div>
-
+                            <div class="link--group text-xl-center">
+                                <input type="text" :value="$props.link" class="input-text" disabled />
+                                <button class="btn btn-info ml-2" @click="copyURL(`${$props.link}`)">Coppy</button>
+                            </div>
                             <div class="text-xs">
                                 Danh mục: Tài chính
                             </div>
@@ -40,29 +43,26 @@
 
                         </div>
                     </div>
-                    <div class="link--group text-xl-center">
-                        <input type="text" :value="$props.link" class="input-text" disabled />
-                        <button class="btn btn-info ml-2" @click="copyURL(`${$props.link}`)">Coppy</button>
-                    </div>
+
                     <div class="col mt-4">
 <!--                        <div class="text-sm">
                             <button class="btn btn-light">Chi tiết</button>
                         </div>-->
                         <!-- Button trigger modal -->
-                        <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#editModal">
+                        <button type="button"  class="btn btn-primary" data-toggle="modal" :data-target="'#editModal-'+this.$props.id">
                             Chi tiết
                         </button>
                     </div>
                     <!-- detail Modal-->
                     <div
                         class="modal fade"
-                        id="editModal"
+                        :id="'editModal-'+this.$props.id"
                         tabindex="-1"
                         role="dialog"
                         aria-labelledby="exampleModalLabel"
                         aria-hidden="true"
                     >
-                        <div class="modal-dialog" role="document">
+                        <div class="modal-dialog embed-responsive" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 v-show="checkAdmin()==true" class="modal-title" id="exampleModalLabel">Cập nhật đơn camp</h5>
@@ -98,10 +98,10 @@
                                             <h4 v-if="checkAdmin()==false">{{$props.name}}</h4>
                                             <input v-if="checkAdmin()==true" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Tên camp">
                                         </div>
-                                        <div class="form-group">
+<!--                                        <div class="form-group">
                                             <label v-show="checkAdmin()==false" for="exampleFormControlInput1">Liên kết: <a><span>{{$props.link}}</span></a></label>
                                             <input v-if="checkAdmin()==true" type="text" class="form-control" id="exampleFormControlInput1" :value="$props.link" disabled>
-                                        </div>
+                                        </div>-->
                                         <div class="form-group">
                                             <label v-show="checkAdmin()==false" for="exampleFormControlSelect1">Loai san pham : <span><b>{{$props.type}}</b></span></label>
                                             <select v-show="checkAdmin()==true" class="form-control" id="exampleFormControlSelect1" :value="$props.type">
@@ -120,11 +120,14 @@
                                                 <option>Thương mại</option>
                                             </select>
                                         </div>
-
+                                        <div class="link--group text-xl-center">
+                                            <input type="text" :value="$props.link" class="input-text" disabled />
+                                            <button class="btn btn-info ml-2" @click="copyURL(`${$props.link}`)">Coppy</button>
+                                        </div>
                                         <div class="form-group">
                                             <label for="exampleFormControlTextarea1">Mô tả:</label>
-                                            <ckeditor  v-show="checkAdmin()==true" :editor="editor"  class="form-control" id="exampleFormControlTextarea1" rows="3"></ckeditor>
-                                            <p v-show="checkAdmin()==false" class="form-control">{{$props.description}}</p>
+                                            <ckeditor v-if="checkAdmin()===true" :editor="editor"  class="form-control" id="exampleFormControlTextarea1" rows="3"></ckeditor>
+                                            <p v-if="checkAdmin()===false" class="form-control">{{$props.description}}</p>
                                         </div>
                                     </form>
                                 </div>
@@ -151,7 +154,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export default {
     name: 'item-Camp',
-    props:["name","type","link","typeProduct","linkProduct","description","img"],
+    props:["name","type","link","typeProduct","linkProduct","description","img","id"],
     components:{
 
     },
@@ -174,7 +177,7 @@ export default {
         },
         checkAdmin(){
             const isAdmin = this.$store.getters.getUserRole
-            if(isAdmin==1){return true}
+            if(isAdmin===1){return true}
             return false;
         }
     },
