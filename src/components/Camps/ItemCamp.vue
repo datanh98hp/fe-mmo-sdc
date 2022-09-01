@@ -11,6 +11,9 @@
                 <div class="card-body text-xl-center">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
+                            <div class="text-center">
+<!--                                <p>{{$props.id}}</p>-->
+                            </div>
                             <div class="card-img">
                                 <img class="img-fluid" alt="" :src="$props.img || './img.jpg'"  />
                             </div>

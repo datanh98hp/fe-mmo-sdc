@@ -6,7 +6,7 @@
     </div>
     <div class="card-body">
       <div class="table-responsive-md">
-            <table class="table"
+            <table class="table table-hover table-borderless"
                         width="100%" cellspacing="0">
 
                     <thead class="thead-light">
@@ -21,7 +21,7 @@
                     </thead>
 
                     <tbody>
-                    <tr v-for="(item,index) in $props.data" :key="item.oder_Id">
+                    <tr v-for="(item,index) in $props.data" :key="item.oder_Id" >
                         <td>{{index}}</td>
                         <td>{{item.campName}}</td>
                         <td>
@@ -86,10 +86,6 @@ export default {
             let month = srtDate.split('/')[0]
             let year = srtDate.split('/')[2].split(',')[0]
             let time = srtDate.split('/')[2].split(',')[1]
-            console.log("Ngay",day)
-            console.log("Thang ",month)
-            console.log("Nam",year)
-            console.log(time)
 
             return  `${day}/${month}/${year} ${time}`
         }

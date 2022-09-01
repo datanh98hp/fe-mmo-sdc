@@ -13,7 +13,7 @@ export default {
         setInterval(()=>{
             localStorage.clear();
             this.$router.push('Login')
-        },60000*30)
+        },60000*5)
         //
     }
 }
