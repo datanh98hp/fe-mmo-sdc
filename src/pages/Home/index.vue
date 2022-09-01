@@ -18,11 +18,10 @@
          </div>
      </div>
      <div class="row">
-
-         <div class="col-xl-6 mb-4 text-center h-5">
+         <div class="col-xl-6 mb-2 text-center h-5">
              <Table title="Đơn hàng mới nhất" :data="this.listOrder" />
          </div>
-         <div class="col-sm-6 mb-4 text-center">
+         <div class="col-xl-6 mb-2 text-center h-5">
              <Table title="Đơn hàng hệ thống" :data="this.listOrderSys" />
          </div>
          <!--  -->
@@ -66,9 +65,9 @@ export default {
     }
    ,
     methods:{
-        handleSearch(){
+       /* handleSearch(){
             console.log('Handle Search...........')
-        },
+        },*/
         handleCurrency(value){
           const formatter = new Intl.NumberFormat('vi-VN',{
                 style:'currency',
@@ -95,6 +94,10 @@ export default {
           this.$router.push({name:'Login'})
       }
       ///
+        setInterval(()=>{
+            localStorage.clear();
+            this.$router.push('Login')
+        },60000*30)
 
     }
 }

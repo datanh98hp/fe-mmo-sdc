@@ -6,7 +6,7 @@
     </div>
     <div class="card-body">
       <div class="table-responsive-md">
-            <table class="table table-borderless"
+            <table class="table"
                         width="100%" cellspacing="0">
 
                     <thead class="thead-light">
@@ -33,7 +33,7 @@
                             </span>
                         </td>
                         <td>{{handleCurrency(item.campPirce)}}</td>
-                        <td>{{item.confirmed_Time}}</td>
+                        <td>{{formatDate(item.confirmed_Time)}}</td>
                         <td>
                             <span class="btn-sm bg-warning rounded-pill text-light" v-if="item.oder_status==1"> Chờ duyệt </span>
                             <span class="btn-sm bg-success rounded-pill text-light" v-if="item.oder_status==2"> Thành công </span>
@@ -78,11 +78,21 @@ export default {
                 currency:'VND'
             })
             return formatter.format(value);
+        },
+        formatDate(datetime){
+            let date = new Date(datetime.toString())
+            let srtDate = date.toLocaleString()
+            let day = srtDate.split('/')[1]
+            let month = srtDate.split('/')[0]
+            let year = srtDate.split('/')[2].split(',')[0]
+            let time = srtDate.split('/')[2].split(',')[1]
+            console.log("Ngay",day)
+            console.log("Thang ",month)
+            console.log("Nam",year)
+            console.log(time)
+
+            return  `${day}/${month}/${year} ${time}`
         }
-       /* formatDate(datetime){
-
-
-        }*/
     }
     ,
     mounted() {
