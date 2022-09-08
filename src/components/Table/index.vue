@@ -8,7 +8,6 @@
       <div class="table-responsive-md">
             <table class="table table-hover table-borderless"
                         width="100%" cellspacing="0">
-
                     <thead class="thead-light">
                     <tr>
                         <th>#</th>

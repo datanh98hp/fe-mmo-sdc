@@ -1,10 +1,11 @@
 <template>
     <div class="col">
-            <form class="row user">
+            <div class="row user">
                 <div class="form-group px-2">
                     <label for="inputState">P.Loai</label>
                     <input type="text" class="form-control"
-                           aria-describedby="emaillHelp"
+                           aria-describedby="" v-model.lazy="searchValue.campTxt"
+                           @change="search(searchValue.campTxt)"
                            placeholder="Ten chien dich...">
                 </div>
                 <div class="form-group px-2">
@@ -18,7 +19,7 @@
                     </select>
                 </div>
                 <hr>
-            </form>
+            </div>
         <hr>
         <div class="row col-12">
             <ItemCamp v-for="(item) in listCamps" :key="item.camp_Id" :id="item.camp_Id" :name="item.camp_Name" :price="item.price" :link="pre_link(item.camp_Id)" :img="item.camps_Image" :type="item.type" :description="item.description"/>
@@ -39,7 +40,11 @@ export default {
     },
     data(){
         return {
-            data:[]
+            data:[],
+            searchValue:{
+                campTxt:"",
+                type:''
+            }
         }
     },
     computed:mapState({
@@ -50,7 +55,17 @@ export default {
 
         this.loadCamps()
     },
+    watch:{
+        searchValue:function (value){
+            console.log("watch :",value.campTxt)
+        }
+    },
     methods:{
+        search(value){
+            //handle search
+            
+          console.log("search: ",value)
+        },
         loadCamps(){
             this.$store.dispatch('getListCamps')
         },

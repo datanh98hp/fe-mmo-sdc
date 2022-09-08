@@ -126,7 +126,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleFormControlTextarea1">Mô tả:</label>
-                                            <ckeditor v-if="checkAdmin()===true" :editor="editor"  class="form-control" id="exampleFormControlTextarea1" rows="3"></ckeditor>
+                                            <ckeditor v-if="checkAdmin()===true" :editor="editor"   class="form-control" id="exampleFormControlTextarea1" rows="3"></ckeditor>
                                             <p v-if="checkAdmin()===false" class="form-control">{{$props.description}}</p>
                                         </div>
                                     </form>
@@ -152,6 +152,8 @@
 <script>
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
+
+
 export default {
     name: 'item-Camp',
     props:["name","type","link","typeProduct","linkProduct","description","img","id"],
@@ -161,6 +163,14 @@ export default {
     data(){
         return {
             editor:ClassicEditor,
+            editorData: '<p>Content of the editor.</p>',
+            editorConfig: {
+                // Run the editor with the German UI.
+                language: 'vi',
+                onUploadProgress:()=>{
+
+                }
+            }
         }
     },
    mounted(){

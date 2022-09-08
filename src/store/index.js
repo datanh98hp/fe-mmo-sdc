@@ -12,7 +12,8 @@ const store = createStore({
             listOrder:[],
             listOrderSys:[],
             turnover:{},
-            linkCamp:''
+            linkCamp:'',
+            resultSearch:{}
         }
     },
     mutations:{
@@ -49,7 +50,7 @@ const store = createStore({
             const url = 'https://api.ipify.org';
 
             axios.get(url).then(res=>{
-                console.log(" Get Ip    action IP",res.data)
+               // console.log(" Get Ip    action IP",res.data)
                 commit("setMyIp",res.data)
             })
         }
@@ -82,7 +83,7 @@ const store = createStore({
                     Authorization:'Bearer '+ token,
                 },
             }).then((res)=>{
-                console.log(res.data)
+                //console.log(res.data)
                 context.commit('setListOrder',res.data)
             })
         },
@@ -96,7 +97,7 @@ const store = createStore({
                     Authorization:'Bearer '+ token,
                 },
             }).then((res)=>{
-                console.log("LOG: ListOrderSys",res.data)
+                ///console.log("LOG: ListOrderSys",res.data)
                 context.commit('setListOrderSys',res.data)
             })
         },
@@ -109,7 +110,7 @@ const store = createStore({
                     Authorization:'Bearer '+ token,
                 },
             }).then((res)=>{
-                console.log("LOG: Tunorver",res.data)
+               // console.log("LOG: Tunorver",res.data)
                 context.commit('setTurnover',res.data)
             })
         },
