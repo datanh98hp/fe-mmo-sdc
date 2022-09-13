@@ -75,13 +75,13 @@ export default {
       }
     },
     mounted(){
-        let user = JSON.parse(localStorage.getItem('user-inf'))
+        /*let user = JSON.parse(localStorage.getItem('user-inf'))
         console.log('Login',user)
          if(user){
              this.$router.push({name:'Home'})
          }else {
              this.$router.push({name:'Login'})
-         }
+         }*/
          ///
 
         //

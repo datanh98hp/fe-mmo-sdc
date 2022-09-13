@@ -16,10 +16,10 @@
              <div>Tổng</div>
          </div>
          <div class="col-md-3">
-             <ChartBar/>
+             <ChartBar :data="this.chartData"/>
          </div>
          <div class="col-md-3">
-             <ChartBar/>
+<!--             <ChartBar :chart-data="this.chartData"/>-->
          </div>
          <div class="col-md-3">
              <div>Click</div>
@@ -61,57 +61,47 @@ export default {
     data() {
         /*const dataNumber = [[50, 30, 15, 50, 20, 28],[40, 20, 12, 15, 20, 25]];
         const user = JSON.parse(localStorage.getItem('user-inf'))*/
+
         return {
             name:'DA',
             searchText:'',
             loading:false,
-            datacollection: {
-                labels: ["week 1", "week 2", "week 3", "week 4", "week 5", "week 6", "week 7", "week 8", "week 9", "week 10"],
+            chartData: {
+            labels: this.$store.getters.getLablesChart,
                 datasets: [
-                    {
-                        data: [86, 114, 106, 106, 107, 111, 133, 221, 783, 2478],
-                        label: "Africa",
-                        borderColor: "#3e95cd",
-                        fill: false
-                    },
-                    {
-                        data: [282, 350, 411, 502, 635, 809, 947, 1402, 3700, 5267],
-                        label: "Asia",
-                        borderColor: "#8e5ea2",
-                        fill: false
-                    },
-                    {
-                        data: [168, 170, 178, 190, 203, 276, 408, 547, 675, 734],
-                        label: "Europe",
-                        borderColor: "#3cba9f",
-                        fill: false
-                    },
-                    {
-                        data: [40, 20, 10, 16, 24, 38, 74, 167, 508, 784],
-                        label: "Latin America",
-                        borderColor: "#e8c3b9",
-                        fill: false
-                    },
-                    {
-                        data: [6, 3, 2, 2, 7, 26, 82, 172, 312, 433],
-                        label: "North America",
-                        borderColor: "#c45850",
-                        fill: false
-                    }
-                ]
-            }
+                {
+                    label: 'Click',
+                    backgroundColor: '#fff220',
+                    data: this.$store.getters.getClickDataChart
+                },
+                {
+                    label: 'Chuyển đổi',
+                    backgroundColor: '#f55060',
+                    data: this.$store.getters.getTransDataChart
+                },
+            ]
+        }
         };
     },
     computed: mapState({
         listOrder: state => reactive(state.listOrder),
         listOrderSys:state => reactive(state.listOrderSys),
         turnover: state =>  reactive(state.turnover),
+       // dataChart: state => reactive(state.dataChart)
+        chartData() { return /* mutable chart data */ },
+        chartOptions() {
 
+            return {
+
+            }
+        }
     }),
+
     watch: {
         searchText:function (value){
-            console.log(value)
-        }
+            console.log("search :",value)
+        },
+
     }
    ,
     methods:{
@@ -122,15 +112,17 @@ export default {
                 currency:'VND'
             })
             return formatter.format(value);
-        }
+        },
+
 
     },
     mounted() {
 
       const user = JSON.parse(localStorage.getItem('user-inf'));
+        console.log(user)
       if (user) {
+          this.$store.dispatch('getDataChart')
           /*this.$router.push({name:'Home'})*/
-
           this.$store.dispatch('getListCamps')
           this.$store.dispatch('getListOrder')
           this.$store.dispatch('getTurnoverData')
@@ -138,14 +130,16 @@ export default {
           //
           this.$store.dispatch('getIpAction')
 
+
+
       }else {
-          this.$router.push({name:'Login'})
+          //this.$router.push({name:'Login'})
       }
       ///
-        setInterval(()=>{
+        /*setInterval(()=>{
             localStorage.clear();
             this.$router.push('Login')
-        },60000*30)
+        },60000*30)*/
 
     }
 }

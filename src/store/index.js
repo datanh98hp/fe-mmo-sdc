@@ -6,14 +6,15 @@ const store = createStore({
     state(){
         return {
             user: userinf,
-            ip:"0.0.0.0",
-            isAuth:false,
-            listCamps:[],
-            listOrder:[],
-            listOrderSys:[],
-            turnover:{},
-            linkCamp:'',
-            resultSearch:{}
+            ip: "0.0.0.0",
+            isAuth: false,
+            listCamps: [],
+            listOrder: [],
+            listOrderSys: [],
+            turnover: {},
+            linkCamp: '',
+            resultSearch: {},
+            dataChart: []
         }
     },
     mutations:{
@@ -40,6 +41,9 @@ const store = createStore({
         },
         setLinkCamp(state,link) {
             state.link = link
+        },
+        setDataChart(state,data){
+            state.dataChart = data
         }
 
     },
@@ -89,7 +93,7 @@ const store = createStore({
         },
         async getListOrderSys(context){
             const token = context.getters.getTokenUser;
-            //const perEl = process.env.NUMBER_ORDER_PERLOAD
+
             const url = `https://accestradeapi3.somee.com/api/Oder/GetOderSystem?numberOders=10`;
 
             axios.get(url,{
@@ -114,6 +118,18 @@ const store = createStore({
                 context.commit('setTurnover',res.data)
             })
         },
+        async getDataChart(context){
+            const token = context.getters.getTokenUser;
+            const userId = context.getters.getUserInf.userId;
+            const url = `https://accestradeapi3.somee.com/api/Chart/GetChartViewByUserId?userId=${userId}`;
+            axios.get(url,{
+                headers:{
+                    Authorization:'Bearer '+ token,
+                },
+            }).then((res)=>{
+                context.commit('setDataChart',res.data)
+            })
+        }
     },
     getters:{
         getUserInf(state){
@@ -142,7 +158,19 @@ const store = createStore({
         },
         getTunorver(state) {
             return state.turnover
-        }
+        },
+        getChartDataValue(state){
+            return state.dataChart
+        },
+        getLablesChart(state){
+            return state.dataChart.map(item=>item.day)
+        },
+        getClickDataChart(state){
+            return state.dataChart.map(item=>item.click_Num)
+        },
+        getTransDataChart(state){
+            return state.dataChart.map(item=>item.tran_Num)
+        },
     }
 })
 export default store;

@@ -1,11 +1,12 @@
 <template>
     <Bar
-        :chart-data="chartData"
+        :chart-data="$props.data" :chart-options="chartOptions"
     />
 </template>
 <script>
 import { Bar } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
@@ -14,32 +15,42 @@ export default {
     components:{
         Bar
     },
+    props:['data'],
+    methods:{
+        refreshChartData(){
+            console.log("refresh data",this.$store.getters.getLablesChart)
+            this.$store.dispatch('getDataChart')
+            this.chartData.labels=this.$store.getters.getLablesChart
+            this.chartData.datasets[0].data=this.$store.getters.getClickDataChart
+            this.chartData.datasets[1].data=this.$store.getters.getTransDataChart
+
+        },
+
+    },
+
     data() {
-       /* let arrClick=[]
-        let arrChuyendoi=[]
-        let arrTongso=[]*/
+   /*     const lables = []*/
         return {
             chartData: {
-                labels: [ 'Thứ 2', 'Thứ 3', 'Thứ 4','Thứ 5','Thứ 6','Thứ 7','Chủ Nhật'],
+                labels:this.$store.getters.getLablesChart,
                 datasets: [
                     {
                         label: 'Click',
                         backgroundColor: '#fff220',
-                        data: [20, 25, 45]
+                        data: this.$store.getters.getClickDataChart
                     },
                     {
                         label: 'Chuyển đổi',
-                        backgroundColor: '#fff00',
-                        data: [40, 10, 50]
+                        backgroundColor: '#f88020',
+                        data: this.$store.getters.getTransDataChart
                     },
-                    {
-                        label: 'Tổng số',
-                        backgroundColor: '#f87979',
-                        data: [60, 20, 60]
-                    }
                 ]
             }
         }
+    },
+    mounted() {
+
+        this.$store.dispatch('getDataChart')
     }
 }
 

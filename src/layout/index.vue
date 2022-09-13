@@ -468,11 +468,11 @@
 
       },
         mounted() {
-            const user = JSON.parse(localStorage.getItem('user-inf')) || ''
+            /*const user = JSON.parse(localStorage.getItem('user-inf')) || ''
 
             if (!user){
                 this.$router.push({name:'Login'})
-            }
+            }*/
         },
         data() {
           //const data = [[50, 30, 15, 50, 20, 28],[40, 20, 12, 15, 20, 25]];
