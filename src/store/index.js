@@ -2,6 +2,22 @@ import {createStore} from 'vuex'
 import axios from "axios";
 let userinf = localStorage.getItem('user-inf');
 userinf = JSON.parse(userinf)
+
+const getDefaultState = () => {
+    return {
+        user: null,
+        ip: "0.0.0.0",
+        isAuth: false,
+        listCamps: [],
+        listOrder: [],
+        listOrderSys: [],
+        turnover: {},
+        linkCamp: '',
+        resultSearch: {},
+        dataChart: [],
+        dataChartSys:[]
+    }
+}
 const store = createStore({
     state(){
         return {
@@ -14,10 +30,14 @@ const store = createStore({
             turnover: {},
             linkCamp: '',
             resultSearch: {},
-            dataChart: []
+            dataChart: [],
+            dataChartSys:[]
         }
     },
     mutations:{
+        resetState(state){
+            Object.assign(state, getDefaultState())
+        },
         setLogined(state){
             state.isAuth = true;
         },
@@ -44,12 +64,17 @@ const store = createStore({
         },
         setDataChart(state,data){
             state.dataChart = data
+        },
+        setDataChartSys(state,data){
+            state.dataChartSys = data
         }
 
     },
     ///
     actions:{
-
+        resetState({commit}){
+            commit('resetState')
+        },
         async getIpAction({commit}){
             const url = 'https://api.ipify.org';
 
@@ -129,7 +154,22 @@ const store = createStore({
             }).then((res)=>{
                 context.commit('setDataChart',res.data)
             })
+        },
+        async getDataChartSys(context){
+            const token = context.getters.getTokenUser;
+            //const userId = context.getters.getUserInf.userId;
+            const url = `http://accestradeapi3.somee.com/api/Chart/GetChartViewBySystem`;
+            axios.get(url,{
+                headers:{
+                    Authorization:'Bearer '+ token,
+                },
+            }).then((res)=>{
+                //console.log(res.data)
+                context.commit('setDataChartSys',res.data)
+            })
         }
+
+
     },
     getters:{
         getUserInf(state){
@@ -171,6 +211,18 @@ const store = createStore({
         getTransDataChart(state){
             return state.dataChart.map(item=>item.tran_Num)
         },
+        getChartDataSysValue(state){
+            return state.dataChartSys
+        },
+        getClickDataSysChart(state){
+            return state.dataChartSys.map(item=>item.click_Num)
+        },
+        getTransDataSysChart(state){
+            return state.dataChartSys.map(item=>item.tran_Num)
+        }
+
+
+
     }
 })
 export default store;

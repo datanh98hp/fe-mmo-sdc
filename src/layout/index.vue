@@ -9,7 +9,7 @@
             <!-- Sidebar - Brand -->
             <router-link
               class="sidebar-brand d-flex align-items-center justify-content-center"
-              to="/"
+              to="/home"
             >
 
               <div class="sidebar-brand-icon rotate-n-15">
@@ -33,7 +33,7 @@
             <hr class="sidebar-divider" />
 
             <!-- Heading -->
-            <div class="sidebar-heading">Interface</div>
+            <div class="sidebar-heading">Công việc</div>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
@@ -210,18 +210,18 @@
                       "
                       aria-labelledby="userDropdown"
                     >
-                      <a class="dropdown-item" href="#">
+                      <router-link class="dropdown-item" to='/profile'>
                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                         Cá nhân
-                      </a>
-                      <a class="dropdown-item" href="#">
+                      </router-link>
+<!--                      <a class="dropdown-item" href="#">
                         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                         Tài khoản
                       </a>
                       <a class="dropdown-item" href="#">
                         <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                         Lịch sử hoạt động
-                      </a>
+                      </a>-->
                       <div class="dropdown-divider"></div>
                       <a
                         class="dropdown-item"
@@ -428,7 +428,7 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Bạn muốn đăng xuất?</h5>
                 <button
                   class="close"
                   type="button"
@@ -439,7 +439,7 @@
                 </button>
               </div>
               <div class="modal-body">
-                Select "Logout" below if you are ready to end your current session.
+                Chọn "Đăng xuất" dưới đây nếu bạn muốn đăng xuất phiên làm việc.
               </div>
               <div class="modal-footer">
                 <button
@@ -483,6 +483,7 @@
         methods:{
           logout(){
               localStorage.clear()
+              this.$store.dispatch('resetState')
               this.$router.push({name:'Login'})
           }
         }
