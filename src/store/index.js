@@ -174,7 +174,7 @@ const store = createStore({
             const token = context.getters.getTokenUser;
             //const userId = context.getters.getUserInf.userId;
             const url = `https://accestradeapi3.somee.com/api/Chart/GetChartViewBySystem`;
-
+            //const url2 = `http://accestradeapi3.somee.com/api/Camps/GetcampsByName`
             axios.get(url,{
                 headers:{
                     Authorization:'Bearer '+ token,

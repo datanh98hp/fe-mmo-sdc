@@ -18,6 +18,7 @@
                         <th>Hoa Hồng Hủy</th>
                         <th>SL Chờ duyệt</th>
                         <th>H.H Chờ duyệt</th>
+                        <th>    </th>
                     </tr>
                     </thead>
 
@@ -31,6 +32,170 @@
                         <td>{{handleCurrency(item.hoaHongHuy)}}</td>
                         <td>{{item.slChoDuyet}}</td>
                         <td>{{handleCurrency(item.hoangHongDuyet)}}</td>
+                        <td>
+                            <a
+                                class="btn btn-link"
+                                href="#"
+                                data-toggle="modal"
+                                :data-target="'#Modal-detail-'+index"
+                            >
+                                <i
+                                    class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
+                                ></i>
+
+                            </a>
+                        </td>
+                        <!-- Logout Modal-->
+                        <div
+                            class="modal fade"
+                            :id=" 'Modal-detail-'+index"
+                            tabindex="-1"
+                            role="dialog"
+                            aria-labelledby="exampleModalLabel"
+                            aria-hidden="true"
+                        >
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Danh sách chi tiết - CampName</h5>
+                                        <button
+                                            class="close"
+                                            type="button"
+                                            data-dismiss="modal"
+                                            aria-label="Close"
+                                        >
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>(Datatable) Bảng Chi tiết ........{{index}}</p>
+                                        <div>
+                                            <table class="table table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">First</th>
+                                                    <th scope="col">Last</th>
+                                                    <th scope="col">Handle</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>Mark</td>
+                                                    <td>Otto</td>
+                                                    <td>@mdo</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">2</th>
+                                                    <td>Jacob</td>
+                                                    <td>Thornton</td>
+                                                    <td>@fat</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>Mark</td>
+                                                    <td>Otto</td>
+                                                    <td>@mdo</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">2</th>
+                                                    <td>Jacob</td>
+                                                    <td>Thornton</td>
+                                                    <td>@fat</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>Mark</td>
+                                                    <td>Otto</td>
+                                                    <td>@mdo</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">2</th>
+                                                    <td>Jacob</td>
+                                                    <td>Thornton</td>
+                                                    <td>@fat</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>Mark</td>
+                                                    <td>Otto</td>
+                                                    <td>@mdo</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">2</th>
+                                                    <td>Jacob</td>
+                                                    <td>Thornton</td>
+                                                    <td>@fat</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>Mark</td>
+                                                    <td>Otto</td>
+                                                    <td>@mdo</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">2</th>
+                                                    <td>Jacob</td>
+                                                    <td>Thornton</td>
+                                                    <td>@fat</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>Mark</td>
+                                                    <td>Otto</td>
+                                                    <td>@mdo</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">2</th>
+                                                    <td>Jacob</td>
+                                                    <td>Thornton</td>
+                                                    <td>@fat</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>Mark</td>
+                                                    <td>Otto</td>
+                                                    <td>@mdo</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">2</th>
+                                                    <td>Jacob</td>
+                                                    <td>Thornton</td>
+                                                    <td>@fat</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>Mark</td>
+                                                    <td>Otto</td>
+                                                    <td>@mdo</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">2</th>
+                                                    <td>Jacob</td>
+                                                    <td>Thornton</td>
+                                                    <td>@fat</td>
+                                                </tr>
+
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button
+                                            class="btn btn-secondary"
+                                            type="button"
+                                            data-dismiss="modal"
+                                        >
+                                            Hủy
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                <!---End model--->
                     </tr>
 
                     </tbody>
@@ -44,9 +209,11 @@
                         <th>Tổng : {{handleCurrency(sumHH_Huy)}}</th>
                         <th>Tổng : {{sumSLCho}}</th>
                         <th>Tổng : "Đang cập nhật"</th>
+                        <td></td>
                     </tr>
                     </tfoot>
                 </table>
+
             </div>
         </div>
 
@@ -55,9 +222,11 @@
 
 <script>
 
+/*import PcIcon from "@/components/IconCustome/PCIcon";*/
 export default {
     name: "data-table",
     components:{
+        /*PcIcon*/
         /*DataTable*/
     },
     props: {
@@ -112,7 +281,6 @@ export default {
             })
             return formatter.format(value);
         },
-
         /*formatDate(datetime){
             let date = new Date(datetime.toString())
             let srtDate = date.toLocaleString()

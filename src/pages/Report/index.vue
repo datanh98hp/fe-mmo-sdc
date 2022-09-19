@@ -1,12 +1,12 @@
 <template>
     <Layout>
         <div class="row-cols-md-3">
-            <form @submit="this.submit($event)">
+<!--            <form @submit="this.submit($event)">-->
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Từ</span>
                 </div>
-                <input type="date" class="form-control" v-model="fromTime" placeholder="" aria-label="Username" aria-describedby="addon-wrapping">
+                <input type="date" class="form-control datepicker" v-model="fromTime" placeholder="" aria-label="Username" aria-describedby="addon-wrapping">
                 <div class="input-group-prepend">
                     <span class="input-group-text" >Đến</span>
                 </div>
@@ -14,13 +14,14 @@
 
                 <button type="submit" class="btn btn-outline-primary px-3 mx-3">Tìm</button>
             </div>
-
-            </form>
+<!--
+            </form>-->
         </div>
         <hr>
         <div>
             <DataTable :data="this.dataReport" />
         </div>
+
     </Layout>
 </template>
 <script>
