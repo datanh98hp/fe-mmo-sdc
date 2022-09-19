@@ -173,7 +173,7 @@ const store = createStore({
         async getDataChartSys(context){
             const token = context.getters.getTokenUser;
             //const userId = context.getters.getUserInf.userId;
-            const url = `http://accestradeapi3.somee.com/api/Chart/GetChartViewBySystem`;
+            const url = `https://accestradeapi3.somee.com/api/Chart/GetChartViewBySystem`;
 
             axios.get(url,{
                 headers:{
@@ -192,7 +192,7 @@ const store = createStore({
             const fromTime = context.getters.getFromDateReport;
             const toTime = context.getters.getToDateReport;
 
-            const url = `http://accestradeapi3.somee.com/api/Oder/GetByTimetoReport?userId=${userId}&from_Time=${fromTime}&to_Time=${toTime}`
+            const url = `https://accestradeapi3.somee.com/api/Oder/GetByTimetoReport?userId=${userId}&from_Time=${fromTime}&to_Time=${toTime}`
             //2022/09/17
             //2022%2F09%2F01 2022%2F09%2F17
 
