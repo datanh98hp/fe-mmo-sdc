@@ -61,13 +61,15 @@ export default {
 
     },
     mounted() {
-        this.chartData.labels = this.$store.getters.getLablesChart
+        /*this.chartData.labels = this.$store.getters.getLablesChart
         this.chartData.datasets[0].data = this.$store.getters.getClickDataChart
         this.chartData.datasets[1].data = this.$store.getters.getTransDataChart
         //
         this.chartDataSys.labels = this.$store.getters.getLablesChart
         this.chartDataSys.datasets[0].data = this.$store.getters.getClickDataSysChart
-        this.chartDataSys.datasets[1].data = this.$store.getters.getTransDataSysChart
+        this.chartDataSys.datasets[1].data = this.$store.getters.getTransDataSysChart*/
+
+
     },
     computed: {
         chartDataUpdate() {
@@ -118,8 +120,7 @@ export default {
                     },
 
                 ]
-            }
-            ,
+            },
             chartOptions: {
                 responsive: true
             }

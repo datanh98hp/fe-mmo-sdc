@@ -15,7 +15,8 @@ const getDefaultState = () => {
         linkCamp: '',
         resultSearch: {},
         dataChart: [],
-        dataChartSys:[]
+        dataChartSys:[],
+        dataReportByUser:{}
     }
 }
 const store = createStore({
@@ -31,7 +32,12 @@ const store = createStore({
             linkCamp: '',
             resultSearch: {},
             dataChart: [],
-            dataChartSys:[]
+            dataChartSys:[],
+            dataReportByUser:{
+                data:[],
+                from:'',
+                to:''
+            }
         }
     },
     mutations:{
@@ -67,6 +73,15 @@ const store = createStore({
         },
         setDataChartSys(state,data){
             state.dataChartSys = data
+        },
+        setFromDateReport(state,fromDate){
+            state.dataReportByUser.from = fromDate
+        },
+        setToDateReport(state,toDate){
+            state.dataReportByUser.to = toDate
+        },
+        setdataReportByUser(state,data){
+            state.dataReportByUser.data = data
         }
 
     },
@@ -159,6 +174,7 @@ const store = createStore({
             const token = context.getters.getTokenUser;
             //const userId = context.getters.getUserInf.userId;
             const url = `http://accestradeapi3.somee.com/api/Chart/GetChartViewBySystem`;
+
             axios.get(url,{
                 headers:{
                     Authorization:'Bearer '+ token,
@@ -166,6 +182,27 @@ const store = createStore({
             }).then((res)=>{
                 //console.log(res.data)
                 context.commit('setDataChartSys',res.data)
+            })
+        },
+
+        async getDataReportByUser(context){
+            const token = context.getters.getTokenUser;
+            const userId = context.getters.getUserInf.userId;
+
+            const fromTime = context.getters.getFromDateReport;
+            const toTime = context.getters.getToDateReport;
+
+            const url = `http://accestradeapi3.somee.com/api/Oder/GetByTimetoReport?userId=${userId}&from_Time=${fromTime}&to_Time=${toTime}`
+            //2022/09/17
+            //2022%2F09%2F01 2022%2F09%2F17
+
+            axios.get(url,{
+                headers:{
+                    Authorization:'Bearer '+ token,
+                },
+            }).then((res)=>{
+                console.log("STORE: ",res.data)
+                context.commit('setdataReportByUser',res.data)
             })
         }
 
@@ -219,9 +256,66 @@ const store = createStore({
         },
         getTransDataSysChart(state){
             return state.dataChartSys.map(item=>item.tran_Num)
+        },
+        getFromDateReport(state){
+            return state.dataReportByUser.from
+        },
+        getToDateReport(state){
+            return state.dataReportByUser.to
+        },
+        getDataReportByUser(state){
+            return state.dataReportByUser.data
+        },
+        getReportSumSLThanhCong(state){
+            const arr = state.dataReportByUser.data.map(item=>item.slThanhCong)
+            let tong = 0
+            arr.map(value=>{
+                tong+=value
+            })
+            return tong
+        },
+        getReportSumSLCho(state){
+            const arr = state.dataReportByUser.data.map(item=>item.slChoDuyet)
+            let tong = 0
+            arr.map(value=>{
+                tong+=value
+            })
+            return tong
+
+        },
+        getReportSumSLHuy(state){
+            const arr = state.dataReportByUser.data.map(item=>item.slHuyBo)
+            let tong = 0
+            arr.map(value=>{
+                tong+=JSON.parse(value)
+            })
+            return tong
+        },
+        // Tinh tong hoa hong cho Cho duyet/Thanh cong/ Da huy
+        getReportSumHH_Duyet(state){
+            const arr = state.dataReportByUser.data.map(item=>item.hoangHongDuyet)
+            let tong = 0
+            arr.map(value=>{
+                tong+=JSON.parse(value)
+            })
+            return tong
+        },
+        getReportSumHH_Cho(state){
+            const arr = state.dataReportByUser.data.map(item=>item.hoangHongCho)
+            let tong = 0
+            arr.map(value=>{
+                tong+=JSON.parse(value)
+            })
+            return tong
+        },
+        getReportSumHH_Huy(state){
+            const arr = state.dataReportByUser.data.map(item=>item.hoaHongHuy)
+            let tong = 0
+            arr.map(value=>{
+                tong+=JSON.parse(value)
+            })
+            return tong
         }
-
-
 
     }
 })

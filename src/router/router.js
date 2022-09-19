@@ -7,7 +7,7 @@ import Camps from "@/pages/Camps";
 import Register from "@/Register";
 import NotFound from "@/pages/NotFound";
 import RedirectLink from "@/components/RedirectLink";
-
+import Report from "@/pages/Report";
 
 
 const routes = [
@@ -15,6 +15,7 @@ const routes = [
     { path: '/home', component: Home, name: 'Home' },
     {path:'/login',component:Login,name: 'Login'},
     {path:'/camps',component:Camps,name:'Camps'},
+    {path:'/report',component:Report,name:'Report'},
     {path:'/register',component:Register},
     {path: '/click/:userId/:campId',component: RedirectLink,props:true},
     { path: '/:pathMatch(.*)*', name: 'NotFound',component:NotFound },
