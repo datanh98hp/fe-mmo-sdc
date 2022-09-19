@@ -1,7 +1,7 @@
 <template>
     <Layout>
         <div class="row-cols-md-3">
-<!--            <form @submit="this.submit($event)">-->
+            <form @submit="this.submit($event)">
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Từ</span>
@@ -14,8 +14,7 @@
 
                 <button type="submit" class="btn btn-outline-primary px-3 mx-3">Tìm</button>
             </div>
-<!--
-            </form>-->
+            </form>
         </div>
         <hr>
         <div>
@@ -46,7 +45,6 @@ export default {
 
         console.log(this.fromTime)
         console.log(this.toTime)
-
         //
         this.$store.commit('setFromDateReport',this.fromTime)
         this.$store.commit('setToDateReport',this.toTime)
@@ -64,6 +62,7 @@ export default {
 
           this.$store.commit('setFromDateReport',fromTime)
           this.$store.commit('setToDateReport',toTime)
+
           //
           this.$store.dispatch('getDataReportByUser')
 

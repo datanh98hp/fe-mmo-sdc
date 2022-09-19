@@ -71,7 +71,7 @@ export default {
             if(value!==''){
                 //handle search
                 console.log("search: ",value)
-                const url = `https://accestradeapi3.somee.com/api/Camps/GetcampsByName?name=${value}?page=1`
+                const url = `https://accestradeapi3.somee.com/api/Camps/GetcampsByName?name=${value}`
                 const token = this.$store.getters.getTokenUser
                 //get data agains
                 axios.get(url,{
