@@ -31,7 +31,7 @@
                         <td>{{item.slHuyBo}}</td>
                         <td>{{handleCurrency(item.hoaHongHuy)}}</td>
                         <td>{{item.slChoDuyet}}</td>
-                        <td>{{handleCurrency(item.hoangHongDuyet)}}</td>
+                        <td>{{handleCurrency(item.hoangHongChoDuyet)}}</td>
                         <td>
                             <a
                                 class="btn btn-link"
@@ -208,7 +208,7 @@
                         <th>Tổng : {{sumSlHuy}}  </th>
                         <th>Tổng : {{handleCurrency(sumHH_Huy)}}</th>
                         <th>Tổng : {{sumSLCho}}</th>
-                        <th>Tổng : "Đang cập nhật"</th>
+                        <th>Tổng : {{handleCurrency(sumHH_Cho)}}</th>
                         <td></td>
                     </tr>
                     </tfoot>
@@ -268,7 +268,7 @@ export default {
             return this.$store.getters.getReportSumSLCho
         },
         sumHH_Cho(){ //dang cap nhat
-            return this.$store.getters.getReportSumSLCho
+            return this.$store.getters.getReportSumHH_Cho
         },
 
     },

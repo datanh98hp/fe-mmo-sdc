@@ -26,8 +26,15 @@
                 <hr>
             </div>
         </form>
-        <hr>
+        <hr v-show="searchValue.campTxt !=='' ">
+        <label v-show="searchValue.campTxt !=='' " class="px-3 ">Kết quả tìm kiếm </label>
         <div class="row col-12">
+            <ItemCamp v-show="searchValue.campTxt !=='' " v-for="(item) in searchValue.data " :key="item.camp_Id" :id="item.camp_Id" :name="item.camp_Name" :price="item.price" :link="pre_link(item.camp_Id)" :img="item.camps_Image" :type="item.type" :description="item.description"/>
+        </div>
+        <hr>
+        <label class="px-3 " v-show="searchValue.campTxt !=='' ">Tất cả chiến dịch</label>
+        <div class="row col-12">
+            
             <ItemCamp v-for="(item) in data" :key="item.camp_Id" :id="item.camp_Id" :name="item.camp_Name" :price="item.price" :link="pre_link(item.camp_Id)" :img="item.camps_Image" :type="item.type" :description="item.description"/>
         </div>
     </div>
@@ -49,6 +56,7 @@ export default {
             searchValue:{
                 campTxt:"",
                 type:'',
+                data:[]
             }
         }
     },
@@ -80,8 +88,10 @@ export default {
                     }
                 }).then((res)=>{
                     //set result
-                    this.$store.commit('setListDataCamps',res.data)
-                    this.$store.dispatch('getListCamps')
+                    // this.$store.commit('setListDataCamps',res.data)
+                    // this.$store.dispatch('getListCamps')
+
+                    this.searchValue.data = res.data
                 })
             }
         },

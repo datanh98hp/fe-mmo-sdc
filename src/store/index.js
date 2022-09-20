@@ -301,7 +301,7 @@ const store = createStore({
             return tong
         },
         getReportSumHH_Cho(state){
-            const arr = state.dataReportByUser.data.map(item=>item.hoangHongCho)
+            const arr = state.dataReportByUser.data.map(item=>item.hoangHongChoDuyet)
             let tong = 0
             arr.map(value=>{
                 tong+=JSON.parse(value)
