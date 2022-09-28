@@ -36,7 +36,8 @@ const store = createStore({
             dataReportByUser:{
                 data:[],
                 from:'',
-                to:''
+                to:'',
+                dataDetailReportCamp:[]
             }
         }
     },
@@ -82,7 +83,25 @@ const store = createStore({
         },
         setdataReportByUser(state,data){
             state.dataReportByUser.data = data
+        },
+        async setDetailDataCamp(state,camp_Id){
+            const from = state.dataReportByUser.from
+            const to = state.dataReportByUser.to
+            const userId = state.user.userId
+            const token = state.user.token
+
+            const url = `https://accestradeapi3.somee.com/api/Oder/GetAllCampsByUserinTime?userId=${userId}&Camp_id=${camp_Id}&from_Time=${from}&to_Time=${to}`
+            axios.get(url,{
+                headers:{
+                    Authorization:'Bearer '+ token,
+                }
+            }).then((res)=>{
+                state.dataReportByUser.dataDetailReportCamp = res.data
+            })
+
+
         }
+
 
     },
     ///
@@ -190,7 +209,7 @@ const store = createStore({
             const userId = context.getters.getUserInf.userId;
 
             const fromTime = context.getters.getFromDateReport;
-            const toTime = context.getters.getToDateReport;
+            const toTime = context.getters.getToDateReport.toString();
 
             const url = `https://accestradeapi3.somee.com/api/Oder/GetByTimetoReport?userId=${userId}&from_Time=${fromTime}&to_Time=${toTime}`
             //2022/09/17
@@ -315,6 +334,10 @@ const store = createStore({
                 tong+=JSON.parse(value)
             })
             return tong
+        },
+        getdataDetailReportCamp(state){
+
+            return state.dataReportByUser.dataDetailReportCamp;
         }
 
     }

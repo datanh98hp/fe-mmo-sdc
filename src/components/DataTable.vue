@@ -6,7 +6,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive-md">
-                <table class="table table-borderless" id="dataTable"
+                <table class="table table-borderless" id=""
                        width="100%" cellspacing="0">
                     <thead class="thead-light">
                     <tr>
@@ -33,7 +33,7 @@
                         <td>{{item.slChoDuyet}}</td>
                         <td>{{handleCurrency(item.hoangHongChoDuyet)}}</td>
                         <td>
-                            <a
+                            <button @click="getDetailCampReport(item.camp_Id)"
                                 class="btn btn-link"
                                 href="#"
                                 data-toggle="modal"
@@ -42,8 +42,8 @@
                                 <i
                                     class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
                                 ></i>
-
-                            </a>
+                                Chi tiet
+                            </button>
                         </td>
                         <!-- Logout Modal-->
                         <div
@@ -68,119 +68,35 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>(Datatable) Bảng Chi tiết ........{{index}}</p>
-                                        <div>
-                                            <table class="table table-hover">
+                                        <p>Tu ngày {{this.$store.state.dataReportByUser.from}} đến {{this.$store.state.dataReportByUser.to}}</p>
+                                      <div v-show="loading || dataDetail.length==0" class="text-center">
+                                        <div class="spinner-border" role="status">
+                                          <span class="sr-only">Loading...</span>
+                                        </div>
+                                      </div>
+                                        <div v-show="!loading ||  dataDetail.length !==0">
+                                            <table class="table table-xl table-hover table-responsive">
                                                 <thead>
                                                 <tr>
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">First</th>
-                                                    <th scope="col">Last</th>
-                                                    <th scope="col">Handle</th>
+                                                    <th scope="col">#Id</th>
+                                                    <th scope="col">Price</th>
+                                                    <th scope="col">Status</th>
+                                                    <th scope="col">TimeSalse</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                    <td>@mdo</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Jacob</td>
-                                                    <td>Thornton</td>
-                                                    <td>@fat</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                    <td>@mdo</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Jacob</td>
-                                                    <td>Thornton</td>
-                                                    <td>@fat</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                    <td>@mdo</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Jacob</td>
-                                                    <td>Thornton</td>
-                                                    <td>@fat</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                    <td>@mdo</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Jacob</td>
-                                                    <td>Thornton</td>
-                                                    <td>@fat</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                    <td>@mdo</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Jacob</td>
-                                                    <td>Thornton</td>
-                                                    <td>@fat</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                    <td>@mdo</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Jacob</td>
-                                                    <td>Thornton</td>
-                                                    <td>@fat</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                    <td>@mdo</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Jacob</td>
-                                                    <td>Thornton</td>
-                                                    <td>@fat</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                    <td>@mdo</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Jacob</td>
-                                                    <td>Thornton</td>
-                                                    <td>@fat</td>
-                                                </tr>
 
+                                                <tr v-for="(it) in dataDetail" :key="it.oderId">
+                                                    <th scope="row">{{it.oderId}}</th>
+                                                    <td>{{it.price}}</td>
+                                                    <td>{{it.status}}</td>
+                                                    <td>{{it.timeSale}}</td>
+                                                </tr>
 
                                                 </tbody>
                                             </table>
                                         </div>
+<!--                                        <DetailDataCampReport :campId="item.camp_Id" />-->
                                     </div>
                                     <div class="modal-footer">
                                         <button
@@ -223,9 +139,13 @@
 <script>
 
 /*import PcIcon from "@/components/IconCustome/PCIcon";*/
+
+
+//import DetailDataCampReport from "@/components/Table/DetailDataCampReport";
 export default {
     name: "data-table",
     components:{
+      //DetailDataCampReport
         /*PcIcon*/
         /*DataTable*/
     },
@@ -242,7 +162,8 @@ export default {
 
     data() {
         return {
-            loading:false,
+            loading:true,
+            dataDetail:[]
             /*slHuy:0,
             slDuyet:0,
             slCho:0,
@@ -267,9 +188,10 @@ export default {
         sumSLCho(){
             return this.$store.getters.getReportSumSLCho
         },
-        sumHH_Cho(){ //dang cap nhat
+        sumHH_Cho(){
             return this.$store.getters.getReportSumHH_Cho
         },
+
 
     },
     methods:{
@@ -281,6 +203,13 @@ export default {
             })
             return formatter.format(value);
         },
+        getDetailCampReport(camp_Id){
+            this.$store.commit('setDetailDataCamp',camp_Id)
+           //this.dataDetail = this.$store.state.dataReportByUser.dataDetailReportCamp
+          this.dataDetail = this.$store.getters.getdataDetailReportCamp
+          this.loading = false
+
+        }
         /*formatDate(datetime){
             let date = new Date(datetime.toString())
             let srtDate = date.toLocaleString()
@@ -291,6 +220,7 @@ export default {
 
             return  `${day}/${month}/${year} ${time}`
         }*/
+
     }
     ,
     mounted() {
