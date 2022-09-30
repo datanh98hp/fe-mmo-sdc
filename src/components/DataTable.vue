@@ -54,7 +54,7 @@
                             aria-labelledby="exampleModalLabel"
                             aria-hidden="true"
                         >
-                            <div class="modal-dialog" role="document">
+                            <div class="modal-dialog modal-xl" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Danh sách chi tiết - CampName</h5>
@@ -74,13 +74,13 @@
                                           <span class="sr-only">Loading...</span>
                                         </div>
                                       </div>
-                                        <div v-show="!loading ||  dataDetail.length !==0">
-                                            <table class="table table-xl table-hover table-responsive">
+                                        <div v-show="!loading ||  dataDetail.length !==0" class="table-responsive">
+                                            <table class="table table-hover">
                                                 <thead>
                                                 <tr>
-                                                    <th scope="col">#Id</th>
+                                                    <th scope="col">#</th>
                                                     <th scope="col">Price</th>
-                                                    <th scope="col">Status</th>
+                                                    <th scope="col">Statu</th>
                                                     <th scope="col">TimeSalse</th>
                                                 </tr>
                                                 </thead>
@@ -88,8 +88,13 @@
 
                                                 <tr v-for="(it) in dataDetail" :key="it.oderId">
                                                     <th scope="row">{{it.oderId}}</th>
-                                                    <td>{{it.price}}</td>
-                                                    <td>{{it.status}}</td>
+                                                    <td>{{handleCurrency(it.price)}}</td>
+                                                    <td>
+
+                                                      <span class="btn-sm bg-warning rounded-pill text-light" v-if="it.status==1"> Chờ duyệt </span>
+                                                      <span class="btn-sm bg-success rounded-pill text-light" v-if="it.status==2"> Thành công </span>
+                                                      <span class="btn-sm bg-danger rounded-pill text-light" v-if="it.status==0"> Đã hủy </span>
+                                                    </td>
                                                     <td>{{it.timeSale}}</td>
                                                 </tr>
 
